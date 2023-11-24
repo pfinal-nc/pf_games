@@ -8,3 +8,7 @@
 .nav_active_mark {
     @apply h-2 w-2 rounded-full bg-green-500 ml-2
 }
+
+.content_2048 {
+    @apply max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8
+}
