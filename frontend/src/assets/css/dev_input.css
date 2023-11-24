@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.nav_active {
+    @apply bg-gradient-to-r from-red-100 to-transparent border-l-2 border-red-500
+}
+.nav_active_mark {
+    @apply h-2 w-2 rounded-full bg-green-500 ml-2
+}

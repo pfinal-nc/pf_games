@@ -2,12 +2,21 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
+	"log"
+	"os"
 )
 
 // App struct
 type App struct {
 	ctx context.Context
+}
+
+type GameConfigData struct {
+	Title    string `json:"title"`
+	Icon     string `json:"icon"`
+	Describe string `json:"describe"`
 }
 
 // NewApp creates a new App application struct
@@ -41,4 +50,22 @@ func (a *App) shutdown(ctx context.Context) {
 // Greet returns a greeting for the given name
 func (a *App) Greet(name string) string {
 	return fmt.Sprintf("Hello %s, It's show time!", name)
+}
+
+func (a *App) GameData() string {
+	game := a.getGameConfig()
+	data, _ := json.Marshal(game)
+	return fmt.Sprintf("%s", string(data))
+}
+
+// GetGameConfig 获取游戏配置
+func (a *App) getGameConfig() (games []GameConfigData) {
+	// TODO 这里可以直接从网上读取 配置
+	content, err := os.ReadFile("./conf/data.json")
+	if err != nil {
+		log.Fatal("Error when opening file: ", err)
+	}
+	//解析json 数据到切片中
+	_ = json.Unmarshal(content, &games)
+	return
 }
