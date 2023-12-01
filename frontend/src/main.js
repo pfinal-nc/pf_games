@@ -60,8 +60,22 @@ function setGameShow() {
             $(this).addClass("nav_active")
             $(this).find('.active_status').addClass("nav_active_mark")
             // 记载对应的游戏页面
-            let load_url = "/games/"+$(this).attr("custom_data") + "/index.html"
+            let load_url = "/games/" + $(this).attr("custom_data") + "/index.html"
             $("#game_content").load(load_url)
         })
     })
+}
+
+function checkLogin() {
+    window.go.main.App.CheckLogin().then(result => {
+        console.log(result)
+        // if (result) {
+        //     $("#login_btn").hide()
+        //     $("#logout_btn").show()
+        // }
+    }).catch(err => {
+        console.log(err);
+    }).finally(() => {
+        console.log("finished!")
+    });
 }

@@ -69,3 +69,16 @@ func (a *App) getGameConfig() (games []GameConfigData) {
 	_ = json.Unmarshal(content, &games)
 	return
 }
+
+type Session struct {
+	ID     string
+	Values map[string]interface{}
+}
+
+// CheckLogin 检测是否登录
+func (a *App) CheckLogin() bool {
+	//session := &Session{
+	//	Values: make(map[string]interface{}),
+	//}
+	return false
+}
