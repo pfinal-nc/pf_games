@@ -17,7 +17,7 @@
     </style>
     <title></title>
 </head>
-<body id="app" class="app">
+<body id="app" class="app overflow-hidden">
 <div class="flex flex-row h-screen antialiased text-gray-800">
     <div class="flex flex-row w-96 flex-shrink-0 bg-gray-100">
         <!-- 导航 -->
@@ -106,16 +106,17 @@
     <div class="flex flex-col h-full w-full bg-white px-4 py-6">
         <div class="h-full overflow-hidden py-4">
             <div class="h-full overflow-y-auto">
-                <div class="grid grid-cols-12 gap-y-2" id="game_content">
-
-                </div>
+                <div class="grid grid-cols-12 gap-y-2" id="game_content"></div>
             </div>
         </div>
     </div>
 </div>
 <script>
     $(function () {
-        checkLogin();
+        if(checkInstall()) {
+            checkLogin();
+        }
+
         // getGames()
     })
 </script>

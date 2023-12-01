@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"wails_game/pkg"
 )
 
 // App struct
@@ -70,15 +71,11 @@ func (a *App) getGameConfig() (games []GameConfigData) {
 	return
 }
 
-type Session struct {
-	ID     string
-	Values map[string]interface{}
+func (a *App) CheckLogin() bool {
+	user := pkg.NewUser()
+	return user.CheckLogin()
 }
 
-// CheckLogin 检测是否登录
-func (a *App) CheckLogin() bool {
-	//session := &Session{
-	//	Values: make(map[string]interface{}),
-	//}
-	return false
+func (a *App) CheckInstall() bool {
+	return pkg.CheckInstall()
 }

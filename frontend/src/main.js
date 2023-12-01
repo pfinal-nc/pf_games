@@ -68,7 +68,30 @@ function setGameShow() {
 
 function checkLogin() {
     window.go.main.App.CheckLogin().then(result => {
-        console.log(result)
+        if (result) {
+
+        } else {
+            $("#app").load("/login.html")
+        }
+        // if (result) {
+        //     $("#login_btn").hide()
+        //     $("#logout_btn").show()
+        // }
+    }).catch(err => {
+        console.log(err);
+    }).finally(() => {
+        console.log("finished!")
+    });
+}
+
+function checkInstall() {
+    window.go.main.App.CheckInstall().then(result => {
+        if (result) {
+            return true
+        } else {
+            $("#app").load("/install.html")
+            return false
+        }
         // if (result) {
         //     $("#login_btn").hide()
         //     $("#logout_btn").show()
