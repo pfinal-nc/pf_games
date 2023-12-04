@@ -12,3 +12,7 @@
 .content_2048 {
     @apply max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8
 }
+
+::-webkit-scrollbar {
+    display: none;
+}

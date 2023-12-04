@@ -14,58 +14,6 @@ function greet() {
     });
 }
 
-// 获取配置的游戏
-function getGames() {
-    // Get 获取节点
-    let game_list_html = ''
-    window.go.main.App.GameData().then(res => {
-        let games = JSON.parse(res)
-        $.each(games, function (i, game) {
-            let li = '<div class="relative flex flex-row items-center p-4 game_li" custom_data="' + game.title + '">\n' +
-                '                        <div class="flex items-center justify-center h-10 w-10 rounded-full bg-pink-500 text-pink-300 font-bold flex-shrink-0">\n' +
-                game.icon +
-                '                        </div>\n' +
-                '                        <div class="flex flex-col flex-grow ml-3">\n' +
-                '                            <div class="flex items-center">\n' +
-                '                                <div class="text-sm font-medium"><span class="font-bold">' + game.title +
-                '</span></div>\n' +
-                '                                <div class="active_status"></div>\n' +
-                '                            </div>\n' +
-                '                            <div class="text-xs truncate w-40">' +
-                game.describe +
-                '                            </div>\n' +
-                '                        </div>\n' +
-                '                    </div>'
-            game_list_html += li
-        })
-        $("#gamesData").html(game_list_html)
-        setGameShow()
-        // 设置第一个游戏被选中
-        $("#gamesData .game_li").first().click()
-        // 加载选中的 游戏页面
-    }).catch(err => {
-        console.log(err);
-    }).finally(() => {
-        console.log("finished!")
-    });
-
-}
-
-// 设置点击
-function setGameShow() {
-    $("#gamesData .game_li").each(function (index) {
-        $(this).on("click", function () {
-            $("#gamesData .game_li").removeClass("nav_active")
-            $("#gamesData .game_li .active_status").removeClass("nav_active_mark")
-            $(this).addClass("nav_active")
-            $(this).find('.active_status').addClass("nav_active_mark")
-            // 记载对应的游戏页面
-            let load_url = "/games/" + $(this).attr("custom_data") + "/index.html"
-            $("#game_content").load(load_url)
-        })
-    })
-}
-
 function checkLogin() {
     window.go.main.App.CheckLogin().then(result => {
         if (result) {
@@ -84,21 +32,103 @@ function checkLogin() {
     });
 }
 
-function checkInstall() {
-    window.go.main.App.CheckInstall().then(result => {
-        if (result) {
-            return true
-        } else {
-            $("#app").load("/install.html")
-            return false
+function Login() {
+    var userName = $('#UserName').val()
+    var PassWord = $('#PassWord').val()
+    if (userName === "") {
+        $("#UserName").addClass("border-red-500")
+        return false;
+    }
+    if (PassWord === "") {
+        $("#PassWord").addClass("border-red-500")
+        return false;
+    }
+    window.go.main.App.Login(userName, PassWord).then(result => {
+        //Display result from Go
+        if (result == true) {
+            window.location.href = "index.html"
         }
-        // if (result) {
-        //     $("#login_btn").hide()
-        //     $("#logout_btn").show()
-        // }
     }).catch(err => {
         console.log(err);
     }).finally(() => {
         console.log("finished!")
     });
+}
+
+function LoginOut() {
+    window.go.main.App.LoginOut().then(result => {
+        //Display result from Go
+        if (result == true) {
+            window.location.href = "index.html"
+        }
+    }).catch(err => {
+        console.log(err);
+    }).finally(() => {
+        console.log("finished!")
+    });
+}
+
+function LoadPage(activePage) {
+    $("#content").load("./" + activePage + ".html")
+}
+
+function initLoadPage() {
+    var activePage = localStorage.getItem("activePage")
+    if (!activePage) {
+        activePage = "pass_list"
+        localStorage.setItem("activePage", activePage)
+    }
+    LoadPage(activePage)
+}
+
+function GetPassList() {
+    window.go.main.App.GetPassList().then(result => {
+        if (result !== "") {
+
+        } else {
+            let no_data_tr = "<tr class='text-white'><td class='text-white/20 mx-auto p-2 text-center' colspan='4'><span class='text-white/50'>没有保存密码</span></td></tr>"
+            $("#password_list").html(no_data_tr)
+        }
+    }).catch(err => {
+        console.log(err);
+    }).finally(() => {
+        console.log("finished!")
+    });
+}
+
+function CreatePassword() {
+    var mark = $('#grid-mark').val()
+    if (mark === "") {
+        $("#grid-mark").addClass("border-red-500")
+        $("#grid-mark-msg").text("* mark不能为空！！")
+        return false
+    }
+    var username = $('#grid-username').val()
+    var password = $('#grid-password').val()
+    if (mark === "") {
+        $("#grid-password").addClass("border-red-500")
+        $("#grid-password-msg").text("* 密码不能为空！！")
+        return false
+    }
+    window.go.main.App.SavePass(mark, username, password).then(result => {
+        if (result) {
+            window.location.reload()
+        }
+    }).catch(err => {
+        console.log(err);
+    }).finally(() => {
+        console.log("finished!")
+    });
+}
+
+function MsgClose() {
+    $("#global_message").fadeOut("slow");
+}
+
+function AlertMsg(msg) {
+    $("#global_message #msg").text(msg)
+    $("#global_message").fadeIn("slow");
+    setTimeout(function (){
+        MsgClose();
+    },1500)
 }

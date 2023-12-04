@@ -4,8 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"log"
-	"os"
+	"time"
 	"wails_game/pkg"
 )
 
@@ -22,6 +21,7 @@ type GameConfigData struct {
 
 // NewApp creates a new App application struct
 func NewApp() *App {
+	pkg.Init()
 	return &App{}
 }
 
@@ -33,7 +33,7 @@ func (a *App) startup(ctx context.Context) {
 
 // domReady is called after front-end resources have been loaded
 func (a App) domReady(ctx context.Context) {
-	// Add your action here
+	// Create your action here
 }
 
 // beforeClose is called when the application is about to quit,
@@ -53,29 +53,42 @@ func (a *App) Greet(name string) string {
 	return fmt.Sprintf("Hello %s, It's show time!", name)
 }
 
-func (a *App) GameData() string {
-	game := a.getGameConfig()
-	data, _ := json.Marshal(game)
-	return fmt.Sprintf("%s", string(data))
-}
-
-// GetGameConfig 获取游戏配置
-func (a *App) getGameConfig() (games []GameConfigData) {
-	// TODO 这里可以直接从网上读取 配置
-	content, err := os.ReadFile("./conf/data.json")
-	if err != nil {
-		log.Fatal("Error when opening file: ", err)
-	}
-	//解析json 数据到切片中
-	_ = json.Unmarshal(content, &games)
-	return
-}
-
 func (a *App) CheckLogin() bool {
-	user := pkg.NewUser()
-	return user.CheckLogin()
+	return pkg.CheckLogin()
 }
 
-func (a *App) CheckInstall() bool {
-	return pkg.CheckInstall()
+func (a *App) Login(username string, password string) bool {
+	admin := pkg.Admin{
+		UserName: username,
+		PassWord: pkg.MD5(password),
+		Created:  time.Now().Format("2006-01-02 15:04:05"),
+	}
+	return pkg.Login(admin)
+}
+func (a *App) LoginOut() bool {
+	return pkg.LoginOut()
+}
+
+func (a *App) GetPassList() string {
+	password := pkg.GetALLPass()
+	fmt.Println(password)
+	if len(password) <= 0 {
+		return ""
+	}
+	marshal, _ := json.Marshal(password)
+	return string(marshal)
+}
+
+func (a *App) SavePass(mark string, username string, psswd string) string {
+	pwd := pkg.PassWord{
+		Mark:     mark,
+		UserName: username,
+		PassWord: psswd,
+		Created:  time.Now().Format("2006-01-02 15:04:05"),
+	}
+	if pkg.Create(pwd) {
+		marshal, _ := json.Marshal(pwd)
+		return string(marshal)
+	}
+	return ""
 }
