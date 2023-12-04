@@ -15,7 +15,7 @@ type DataBase struct {
 func (d *DataBase) Start() {
 	if d.Db == nil {
 		// TODO 这里需要配置一下数据库的目录
-		db, err := sql.Open("sqlite3", "./database/foo.db")
+		db, err := sql.Open("sqlite3", "/tmp/foo.db")
 		d.checkErr(err)
 		d.Db = db
 	}
@@ -31,7 +31,7 @@ func (d *DataBase) Close() {
 }
 func (d *DataBase) checkErr(err error) {
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 }
 func (d *DataBase) CheckTable(tableName string) bool {
