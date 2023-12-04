@@ -3,6 +3,7 @@ package pkg
 import (
 	"context"
 	"database/sql"
+	"time"
 )
 
 /**
@@ -60,7 +61,7 @@ func Create(pwd PassWord) bool {
 	return true
 }
 
-func GetALLPass() (passwords []PassWord) {
+func GetALLPwd() (passwords []PassWord) {
 	db := &DataBase{}
 	db.Start()
 	defer db.Close()
@@ -69,6 +70,8 @@ func GetALLPass() (passwords []PassWord) {
 	for rows.Next() {
 		var pw PassWord
 		_ = rows.Scan(&pw.Pid, &pw.Mark, &pw.UserName, &pw.PassWord, &pw.Created)
+		parsedTime, _ := time.Parse(time.RFC3339, pw.Created)
+		pw.Created = parsedTime.Format("2006-01-02 15:04:05")
 		passwords = append(passwords, pw)
 	}
 	return passwords

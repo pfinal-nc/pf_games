@@ -70,7 +70,7 @@ func (a *App) LoginOut() bool {
 }
 
 func (a *App) GetPassList() string {
-	password := pkg.GetALLPass()
+	password := pkg.GetALLPwd()
 	fmt.Println(password)
 	if len(password) <= 0 {
 		return ""
