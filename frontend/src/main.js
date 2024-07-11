@@ -4,23 +4,33 @@
 $(function () {
     checkLogin().then(result => {
         if (!result) {
-            clearInterval(timer)
             $("#app").load("/login.html")
         }else {
             initLoadPage();
         }
     })
-})
-// 检测登录状态
-let timer = setInterval(() => {
-    console.log("checkLogin")
-    checkLogin().then(result => {
-        if (!result) {
-            clearInterval(timer)
-            $("#app").load("/login.html")
-        }
+    $(document).on("click",".lodePage",function (){
+        var activePage = $(this).attr("data-page")
+        console.log(activePage)
+        localStorage.setItem("activePage", activePage)
+        LoadPage(activePage)
     })
-}, 5000)
+})
+
+function LoopCheckLogin() {
+    // 检测登录状态
+    let timer = setInterval(() => {
+        console.log("checkLogin");
+        checkLogin().then(result => {
+            console.log(result);
+            if (!result) {
+                clearInterval(timer);
+                $("#app").load("/login.html");
+            }
+        });
+    }, 5000);
+}
+
 function greet() {
     //Get user input
     let inputName = document.getElementById("name").value;
@@ -39,15 +49,6 @@ function greet() {
 function checkLogin() {
     return window.go.main.App.CheckLogin().then(result => {
         return result
-        // if (result) {
-        //
-        // } else {
-        //     $("#app").load("/login.html")
-        // }
-        // if (result) {
-        //     $("#login_btn").hide()
-        //     $("#logout_btn").show()
-        // }
     }).catch(err => {
         console.log(err);
         return false;
@@ -67,10 +68,11 @@ function Login() {
         return false;
     }
     window.go.main.App.Login(userName, PassWord).then(result => {
-        console.log("登录:".result)
         //Display result from Go
-        if (result == true) {
-            window.location.href = "index.html"
+        console.log(result)
+        if (result) {
+            $("#app").load("/index.html")
+            LoopCheckLogin()
         }
     }).catch(err => {
         console.log(err);
@@ -99,7 +101,7 @@ function LoadPage(activePage) {
 function initLoadPage() {
     var activePage = localStorage.getItem("activePage")
     if (!activePage) {
-        activePage = "pass_list"
+        activePage = "home"
         localStorage.setItem("activePage", activePage)
     }
     LoadPage(activePage)
