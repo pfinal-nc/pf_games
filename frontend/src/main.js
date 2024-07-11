@@ -1,4 +1,26 @@
 //Global JS function for greeting
+// 定时调用 每隔 5s 调用一次 检测是否登录
+// 自执行
+$(function () {
+    checkLogin().then(result => {
+        if (!result) {
+            clearInterval(timer)
+            $("#app").load("/login.html")
+        }else {
+            initLoadPage();
+        }
+    })
+})
+// 检测登录状态
+let timer = setInterval(() => {
+    console.log("checkLogin")
+    checkLogin().then(result => {
+        if (!result) {
+            clearInterval(timer)
+            $("#app").load("/login.html")
+        }
+    })
+}, 5000)
 function greet() {
     //Get user input
     let inputName = document.getElementById("name").value;
@@ -15,26 +37,27 @@ function greet() {
 }
 
 function checkLogin() {
-    window.go.main.App.CheckLogin().then(result => {
-        if (result) {
-
-        } else {
-            $("#app").load("/login.html")
-        }
+    return window.go.main.App.CheckLogin().then(result => {
+        return result
+        // if (result) {
+        //
+        // } else {
+        //     $("#app").load("/login.html")
+        // }
         // if (result) {
         //     $("#login_btn").hide()
         //     $("#logout_btn").show()
         // }
     }).catch(err => {
         console.log(err);
-    }).finally(() => {
-        console.log("finished!")
+        return false;
     });
 }
 
 function Login() {
-    var userName = $('#UserName').val()
-    var PassWord = $('#PassWord').val()
+    console.log("点击登录")
+    let userName = $('#UserName').val()
+    let PassWord = $('#PassWord').val()
     if (userName === "") {
         $("#UserName").addClass("border-red-500")
         return false;
@@ -44,6 +67,7 @@ function Login() {
         return false;
     }
     window.go.main.App.Login(userName, PassWord).then(result => {
+        console.log("登录:".result)
         //Display result from Go
         if (result == true) {
             window.location.href = "index.html"

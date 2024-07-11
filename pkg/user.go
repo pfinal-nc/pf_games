@@ -29,7 +29,8 @@ func (u *User) startup(ctx context.Context) {
 
 // CheckLogin 检测是否登录
 func CheckLogin() bool {
-	_, err := os.Stat("/tmp/database/tstatus")
+	currentDir, _ := os.Getwd()
+	_, err := os.Stat(currentDir + "/database/tstatus")
 	if err != nil {
 		if os.IsExist(err) {
 			return true
@@ -49,6 +50,7 @@ func Login(admin Admin) bool {
 		db.checkErr(err)
 	}(stmt)
 	user := stmt.QueryRow(admin.UserName, admin.PassWord)
+	fmt.Println(user)
 	var adminUser Admin
 	uid := 0
 	_ = user.Scan(&uid, &adminUser.UserName, &adminUser.PassWord, &adminUser.Created)
@@ -62,7 +64,9 @@ func Login(admin Admin) bool {
 }
 
 func LoginOut() bool {
-	err := os.Remove("/tmp/database/tstatus")
+	currentDir, _ := os.Getwd()
+	// 检测d
+	err := os.Remove(currentDir + "/database/tstatus")
 	if err != nil {
 		return false
 	}
@@ -70,9 +74,10 @@ func LoginOut() bool {
 }
 
 func saveLogin(user Admin) {
+	currentDir, _ := os.Getwd()
 	userStr, _ := encodeToBase64(user)
 	fmt.Println(userStr)
-	file, _ := os.Create("/tmp/database/tstatus")
+	file, _ := os.Create(currentDir + "/database/tstatus")
 	defer func(file *os.File) {
 		_ = file.Close()
 	}(file)

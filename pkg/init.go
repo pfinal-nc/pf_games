@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	_ "github.com/mattn/go-sqlite3"
+	"os"
 	"sync"
 	"time"
 )
@@ -13,9 +14,18 @@ type DataBase struct {
 }
 
 func (d *DataBase) Start() {
+	// 获取当前路径
+	currentDir, err := os.Getwd()
+	d.checkErr(err)
+	// 检测当前路径下是否有数据库文件 如果没有则创建
+	dbPath := currentDir + "/database/foo.db"
+	_, err = os.Stat(dbPath)
+	if os.IsNotExist(err) {
+		_, err := os.Create(dbPath)
+		d.checkErr(err)
+	}
 	if d.Db == nil {
-		// TODO 这里需要配置一下数据库的目录
-		db, err := sql.Open("sqlite3", "/tmp/foo.db")
+		db, err := sql.Open("sqlite3", dbPath)
 		d.checkErr(err)
 		d.Db = db
 	}
