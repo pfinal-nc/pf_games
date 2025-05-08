@@ -1,11 +1,383 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PFinalClub Games</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Custom styles -->
+    <style type="text/tailwindcss">
+        @layer components {
+            .game-card {
+                @apply bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:shadow-xl hover:-translate-y-1;
+            }
+            .game-card-img {
+                @apply w-full h-48 object-cover;
+            }
+            .btn-play {
+                @apply px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors;
+            }
+            .lang-switch {
+                @apply flex items-center space-x-1 px-3 py-1 rounded-full bg-indigo-700 hover:bg-indigo-800 transition-colors cursor-pointer;
+            }
+        }
+    </style>
 </head>
-<body>
-    首页
+<body class="bg-gray-100 min-h-screen">
+    <!-- Header -->
+    <header class="bg-indigo-600 text-white shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
+                </svg>
+                <span class="text-xl font-bold" data-lang-key="siteName">PFinalClub Games</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div id="langSwitch" class="lang-switch">
+                    <span id="currentLang" class="text-sm font-medium">中文</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+                    </svg>
+                </div>
+                <nav>
+                    <ul class="flex space-x-6">
+                        <li><a href="#" class="hover:text-indigo-200" data-lang-key="nav.home">首页</a></li>
+                        <li><a href="#" class="hover:text-indigo-200" data-lang-key="nav.allGames">全部游戏</a></li>
+                        <li><a href="#" class="hover:text-indigo-200" data-lang-key="nav.leaderboard">排行榜</a></li>
+                        <li><a href="#" class="hover:text-indigo-200" data-lang-key="nav.about">关于我们</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-indigo-700 text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl font-bold mb-4" data-lang-key="hero.title">欢迎来到 PFinalClub 游戏世界</h1>
+            <p class="text-xl mb-8 max-w-2xl mx-auto" data-lang-key="hero.subtitle">探索我们精心挑选的小游戏合集，随时随地享受游戏的乐趣！</p>
+            <button class="bg-white text-indigo-700 px-6 py-3 rounded-full font-bold hover:bg-indigo-100 transition-colors" data-lang-key="hero.button">
+                开始探索
+            </button>
+        </div>
+    </section>
+
+    <!-- Game List Section -->
+    <section class="py-12">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12" data-lang-key="games.title">热门游戏</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Game Card 1 -->
+                <div class="game-card">
+                    <div class="relative">
+                        <img src="https://placehold.co/600x400/indigo/white?text=2048" alt="2048 Game" class="game-card-img">
+                        <span class="absolute top-2 right-2 bg-yellow-400 text-xs font-bold px-2 py-1 rounded-full" data-lang-key="games.hot">热门</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-xl font-bold mb-2">2048</h3>
+                        <p class="text-gray-600 mb-4" data-lang-key="games.2048.desc">合并数字，挑战你的大脑！看看你能否达到2048或更高。</p>
+                        <a href="#" class="btn-play inline-block" data-lang-key="games.playButton">开始游戏</a>
+                    </div>
+                </div>
+
+                <!-- Game Card 2 -->
+                <div class="game-card">
+                    <div class="relative">
+                        <img src="https://placehold.co/600x400/orange/white?text=贪吃蛇" alt="Snake Game" class="game-card-img" data-lang-img="snake">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-xl font-bold mb-2" data-lang-key="games.snake.title">贪吃蛇</h3>
+                        <p class="text-gray-600 mb-4" data-lang-key="games.snake.desc">经典的贪吃蛇游戏，控制蛇吃食物并避免碰到墙壁或自己。</p>
+                        <a href="#" class="btn-play inline-block" data-lang-key="games.playButton">开始游戏</a>
+                    </div>
+                </div>
+
+                <!-- Game Card 3 -->
+                <div class="game-card">
+                    <div class="relative">
+                        <img src="https://placehold.co/600x400/green/white?text=俄罗斯方块" alt="Tetris Game" class="game-card-img" data-lang-img="tetris">
+                        <span class="absolute top-2 right-2 bg-green-400 text-xs font-bold px-2 py-1 rounded-full" data-lang-key="games.new">新游戏</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-xl font-bold mb-2" data-lang-key="games.tetris.title">俄罗斯方块</h3>
+                        <p class="text-gray-600 mb-4" data-lang-key="games.tetris.desc">经典的俄罗斯方块游戏，旋转和移动方块以完成行。</p>
+                        <a href="#" class="btn-play inline-block" data-lang-key="games.playButton">开始游戏</a>
+                    </div>
+                </div>
+
+                <!-- Game Card 4 -->
+                <div class="game-card">
+                    <div class="relative">
+                        <img src="https://placehold.co/600x400/red/white?text=记忆翻牌" alt="Memory Card Game" class="game-card-img" data-lang-img="memory">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-xl font-bold mb-2" data-lang-key="games.memory.title">记忆翻牌</h3>
+                        <p class="text-gray-600 mb-4" data-lang-key="games.memory.desc">测试你的记忆力，找出所有匹配的卡片对。</p>
+                        <a href="#" class="btn-play inline-block" data-lang-key="games.playButton">开始游戏</a>
+                    </div>
+                </div>
+
+                <!-- Game Card 5 -->
+                <div class="game-card">
+                    <div class="relative">
+                        <img src="https://placehold.co/600x400/purple/white?text=数独" alt="Sudoku Game" class="game-card-img" data-lang-img="sudoku">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-xl font-bold mb-2" data-lang-key="games.sudoku.title">数独</h3>
+                        <p class="text-gray-600 mb-4" data-lang-key="games.sudoku.desc">填充9x9网格，使每行、每列和每个3x3方块包含数字1-9。</p>
+                        <a href="#" class="btn-play inline-block" data-lang-key="games.playButton">开始游戏</a>
+                    </div>
+                </div>
+
+                <!-- Game Card 6 -->
+                <div class="game-card">
+                    <div class="relative">
+                        <img src="https://placehold.co/600x400/blue/white?text=扫雷" alt="Minesweeper Game" class="game-card-img" data-lang-img="minesweeper">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-xl font-bold mb-2" data-lang-key="games.minesweeper.title">扫雷</h3>
+                        <p class="text-gray-600 mb-4" data-lang-key="games.minesweeper.desc">经典的扫雷游戏，避开地雷并清除所有安全区域。</p>
+                        <a href="#" class="btn-play inline-block" data-lang-key="games.playButton">开始游戏</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="#" class="inline-block px-6 py-3 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors" data-lang-key="games.viewAll">
+                    查看全部游戏
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12" data-lang-key="categories.title">游戏分类</h2>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <a href="#" class="bg-blue-500 text-white rounded-lg p-6 text-center hover:bg-blue-600 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                    </svg>
+                    <span class="font-bold" data-lang-key="categories.puzzle">益智游戏</span>
+                </a>
+
+                <a href="#" class="bg-green-500 text-white rounded-lg p-6 text-center hover:bg-green-600 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                    <span class="font-bold" data-lang-key="categories.action">动作游戏</span>
+                </a>
+
+                <a href="#" class="bg-yellow-500 text-white rounded-lg p-6 text-center hover:bg-yellow-600 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span class="font-bold" data-lang-key="categories.casual">休闲游戏</span>
+                </a>
+
+                <a href="#" class="bg-red-500 text-white rounded-lg p-6 text-center hover:bg-red-600 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h.5A2.5 2.5 0 0020 5.5v-1.65" />
+                    </svg>
+                    <span class="font-bold" data-lang-key="categories.strategy">策略游戏</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4" data-lang-key="footer.title">PFinalClub Games</h3>
+                    <p class="text-gray-400" data-lang-key="footer.description">提供最好玩的在线小游戏合集，随时随地享受游戏的乐趣！</p>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold mb-4" data-lang-key="footer.quickLinks">快速链接</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white" data-lang-key="nav.home">首页</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white" data-lang-key="nav.allGames">全部游戏</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white" data-lang-key="nav.leaderboard">排行榜</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white" data-lang-key="nav.about">关于我们</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold mb-4" data-lang-key="footer.contact">联系我们</h3>
+                    <p class="text-gray-400 mb-2" data-lang-key="footer.contactText">有任何问题或建议？请联系我们！</p>
+                    <a href="mailto:contact@pfinalclub.com" class="text-indigo-400 hover:text-indigo-300">contact@pfinalclub.com</a>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p data-lang-key="footer.copyright">&copy; 2023 PFinalClub Games. 保留所有权利。</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Language Switcher Script -->
+    <script>
+        // Language data
+        const languages = {
+            zh: {
+                'siteName': 'PFinalClub Games',
+                'nav.home': '首页',
+                'nav.allGames': '全部游戏',
+                'nav.leaderboard': '排行榜',
+                'nav.about': '关于我们',
+                'hero.title': '欢迎来到 PFinalClub 游戏世界',
+                'hero.subtitle': '探索我们精心挑选的小游戏合集，随时随地享受游戏的乐趣！',
+                'hero.button': '开始探索',
+                'games.title': '热门游戏',
+                'games.hot': '热门',
+                'games.new': '新游戏',
+                'games.2048.desc': '合并数字，挑战你的大脑！看看你能否达到2048或更高。',
+                'games.snake.title': '贪吃蛇',
+                'games.snake.desc': '经典的贪吃蛇游戏，控制蛇吃食物并避免碰到墙壁或自己。',
+                'games.tetris.title': '俄罗斯方块',
+                'games.tetris.desc': '经典的俄罗斯方块游戏，旋转和移动方块以完成行。',
+                'games.memory.title': '记忆翻牌',
+                'games.memory.desc': '测试你的记忆力，找出所有匹配的卡片对。',
+                'games.sudoku.title': '数独',
+                'games.sudoku.desc': '填充9x9网格，使每行、每列和每个3x3方块包含数字1-9。',
+                'games.minesweeper.title': '扫雷',
+                'games.minesweeper.desc': '经典的扫雷游戏，避开地雷并清除所有安全区域。',
+                'games.playButton': '开始游戏',
+                'games.viewAll': '查看全部游戏',
+                'categories.title': '游戏分类',
+                'categories.puzzle': '益智游戏',
+                'categories.action': '动作游戏',
+                'categories.casual': '休闲游戏',
+                'categories.strategy': '策略游戏',
+                'footer.title': 'PFinalClub Games',
+                'footer.description': '提供最好玩的在线小游戏合集，随时随地享受游戏的乐趣！',
+                'footer.quickLinks': '快速链接',
+                'footer.contact': '联系我们',
+                'footer.contactText': '有任何问题或建议？请联系我们！',
+                'footer.copyright': '© 2023 PFinalClub Games. 保留所有权利。'
+            },
+            en: {
+                'siteName': 'PFinalClub Games',
+                'nav.home': 'Home',
+                'nav.allGames': 'All Games',
+                'nav.leaderboard': 'Leaderboard',
+                'nav.about': 'About Us',
+                'hero.title': 'Welcome to PFinalClub Games World',
+                'hero.subtitle': 'Explore our carefully selected collection of mini-games and enjoy gaming anytime, anywhere!',
+                'hero.button': 'Start Exploring',
+                'games.title': 'Popular Games',
+                'games.hot': 'HOT',
+                'games.new': 'NEW',
+                'games.2048.desc': 'Merge numbers and challenge your brain! See if you can reach 2048 or higher.',
+                'games.snake.title': 'Snake',
+                'games.snake.desc': 'Classic snake game. Control the snake to eat food and avoid hitting walls or yourself.',
+                'games.tetris.title': 'Tetris',
+                'games.tetris.desc': 'Classic Tetris game. Rotate and move blocks to complete rows.',
+                'games.memory.title': 'Memory Cards',
+                'games.memory.desc': 'Test your memory by finding all matching card pairs.',
+                'games.sudoku.title': 'Sudoku',
+                'games.sudoku.desc': 'Fill the 9x9 grid so that each row, column, and 3x3 box contains digits 1-9.',
+                'games.minesweeper.title': 'Minesweeper',
+                'games.minesweeper.desc': 'Classic minesweeper game. Avoid mines and clear all safe areas.',
+                'games.playButton': 'Play Now',
+                'games.viewAll': 'View All Games',
+                'categories.title': 'Game Categories',
+                'categories.puzzle': 'Puzzle Games',
+                'categories.action': 'Action Games',
+                'categories.casual': 'Casual Games',
+                'categories.strategy': 'Strategy Games',
+                'footer.title': 'PFinalClub Games',
+                'footer.description': 'Providing the best online mini-games collection for you to enjoy anytime, anywhere!',
+                'footer.quickLinks': 'Quick Links',
+                'footer.contact': 'Contact Us',
+                'footer.contactText': 'Have questions or suggestions? Contact us!',
+                'footer.copyright': '© 2023 PFinalClub Games. All Rights Reserved.'
+            }
+        };
+
+        // DOM elements
+        const langSwitch = document.getElementById('langSwitch');
+        const currentLangElement = document.getElementById('currentLang');
+        const htmlElement = document.documentElement;
+
+        // Initialize language
+        let currentLang = localStorage.getItem('language') || 'zh';
+        updateLanguage(currentLang);
+
+        // Language switch event
+        langSwitch.addEventListener('click', () => {
+            currentLang = currentLang === 'zh' ? 'en' : 'zh';
+            updateLanguage(currentLang);
+            localStorage.setItem('language', currentLang);
+        });
+
+        // Update all text elements with the selected language
+        function updateLanguage(lang) {
+            // Update HTML lang attribute
+            htmlElement.setAttribute('lang', lang === 'zh' ? 'zh-CN' : 'en');
+
+            // Update language display
+            currentLangElement.textContent = lang === 'zh' ? '中文' : 'English';
+
+            // Update all elements with data-lang-key attribute
+            const elements = document.querySelectorAll('[data-lang-key]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-lang-key');
+                if (languages[lang][key]) {
+                    element.textContent = languages[lang][key];
+                }
+            });
+
+            // Update image alt texts and placeholders if needed
+            const langImages = document.querySelectorAll('[data-lang-img]');
+            langImages.forEach(img => {
+                const gameType = img.getAttribute('data-lang-img');
+                const text = lang === 'zh' ? getChineseGameName(gameType) : getEnglishGameName(gameType);
+                const src = img.src;
+                const newSrc = src.replace(/text=([^&]+)/, `text=${encodeURIComponent(text)}`);
+                img.src = newSrc;
+                img.alt = text;
+            });
+        }
+
+        // Helper functions for game names
+        function getChineseGameName(type) {
+            const names = {
+                'snake': '贪吃蛇',
+                'tetris': '俄罗斯方块',
+                'memory': '记忆翻牌',
+                'sudoku': '数独',
+                'minesweeper': '扫雷'
+            };
+            return names[type] || type;
+        }
+
+        function getEnglishGameName(type) {
+            const names = {
+                'snake': 'Snake',
+                'tetris': 'Tetris',
+                'memory': 'Memory Cards',
+                'sudoku': 'Sudoku',
+                'minesweeper': 'Minesweeper'
+            };
+            return names[type] || type;
+        }
+
+        // Check if there's a saved language preference and apply it
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('language');
+            if (savedLang) {
+                currentLang = savedLang;
+                updateLanguage(currentLang);
+            }
+        });
+    </script>
 </body>
 </html>
