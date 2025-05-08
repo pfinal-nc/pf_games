@@ -26,12 +26,12 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateLanguage(lang) {
         // Update HTML lang attribute
         htmlElement.setAttribute('lang', lang === 'zh' ? 'zh-CN' : 'en');
-        
+
         // Update language display
         if (currentLangElement) {
             currentLangElement.textContent = lang === 'zh' ? '中文' : 'English';
         }
-        
+
         // Update all elements with data-lang-key attribute
         const elements = document.querySelectorAll('[data-lang-key]');
         elements.forEach(element => {
@@ -40,7 +40,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 element.textContent = languages[lang][key];
             }
         });
-        
+
+        // Update placeholder attributes
+        const placeholders = document.querySelectorAll('[data-lang-placeholder]');
+        placeholders.forEach(element => {
+            const key = element.getAttribute('data-lang-placeholder');
+            if (languages[lang][key]) {
+                element.placeholder = languages[lang][key];
+            }
+        });
+
         // Update image alt texts and placeholders if needed
         const langImages = document.querySelectorAll('[data-lang-img]');
         langImages.forEach(img => {

@@ -58,7 +58,22 @@ const languages = {
         'about.feature_4': '持续更新，推陈出新',
         'about.contact_us': '联系我们',
         'about.contact_desc': '如果您有任何问题或建议，欢迎通过以下方式与我们联系：',
-        'language': '语言'
+        'language': '语言',
+        // 全部游戏页面翻译
+        'games.allGames.title': '全部游戏',
+        'games.allGames.subtitle': '探索我们的游戏合集，找到您喜欢的游戏并立即开始游戏！',
+        'games.categories': '游戏分类',
+        'games.category.all': '全部',
+        'games.category.puzzle': '益智',
+        'games.category.arcade': '街机',
+        'games.category.strategy': '策略',
+        'games.category.memory': '记忆',
+        'games.category.board': '棋牌',
+        'games.category.word': '文字',
+        'games.category.popular': '热门',
+        'games.search.placeholder': '搜索游戏...',
+        'games.search.noResults': '没有找到符合条件的游戏',
+        'games.comingSoon': '即将推出'
     },
     en: {
         'siteName': 'PFinalClub Games',
@@ -114,7 +129,22 @@ const languages = {
         'about.feature_4': 'Continuous updates with new content',
         'about.contact_us': 'Contact Us',
         'about.contact_desc': 'If you have any questions or suggestions, please contact us through the following channels:',
-        'language': 'Language'
+        'language': 'Language',
+        // All Games page translations
+        'games.allGames.title': 'All Games',
+        'games.allGames.subtitle': 'Explore our game collection, find your favorite and start playing right away!',
+        'games.categories': 'Game Categories',
+        'games.category.all': 'All',
+        'games.category.puzzle': 'Puzzle',
+        'games.category.arcade': 'Arcade',
+        'games.category.strategy': 'Strategy',
+        'games.category.memory': 'Memory',
+        'games.category.board': 'Board',
+        'games.category.word': 'Word',
+        'games.category.popular': 'Popular',
+        'games.search.placeholder': 'Search games...',
+        'games.search.noResults': 'No games found matching your criteria',
+        'games.comingSoon': 'Coming Soon'
     }
 };
 
