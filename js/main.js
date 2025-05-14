@@ -60,6 +60,11 @@ document.addEventListener('DOMContentLoaded', function() {
             img.src = newSrc;
             img.alt = text;
         });
+        
+        // 触发语言变化事件
+        document.dispatchEvent(new CustomEvent('languageChanged', { 
+            detail: { language: lang } 
+        }));
     }
 
     // Check if there's a saved language preference and apply it

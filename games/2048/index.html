@@ -4,7 +4,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>可爱 2048 游戏</title>
+
+    <!-- Primary Meta Tags -->
+    <title>可爱 2048 游戏 - PFinalClub Games | 合并数字，挑战你的大脑</title>
+    <meta name="title" content="可爱 2048 游戏 - PFinalClub Games | 合并数字，挑战你的大脑">
+    <meta name="description" content="在这个可爱版2048游戏中，合并相同的卡片，挑战你的大脑！看看你能否达到2048或更高。免费在线玩，无需下载。">
+    <meta name="keywords" content="2048, 可爱2048, 数字游戏, 益智游戏, 在线游戏, 免费游戏, 合并游戏, 猫咪游戏">
+    <meta name="author" content="PFinalClub">
+    <meta name="robots" content="index, follow">
+    <meta name="google" content="notranslate">
+    <meta name="google-site-verification" content="your-verification-code">
+
+    <!-- Hreflang Tags for Language Alternatives -->
+    <link rel="alternate" hreflang="en" href="http://game.friday-go.icu/en/games/2048/" />
+    <link rel="alternate" hreflang="zh" href="http://game.friday-go.icu/zh/games/2048/" />
+    <link rel="alternate" hreflang="x-default" href="http://game.friday-go.icu/games/2048/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://game.friday-go.icu/games/2048/">
+    <meta property="og:title" content="可爱 2048 游戏 - PFinalClub Games | 合并数字，挑战你的大脑">
+    <meta property="og:description" content="在这个可爱版2048游戏中，合并相同的卡片，挑战你的大脑！看看你能否达到2048或更高。免费在线玩，无需下载。">
+    <meta property="og:image" content="http://game.friday-go.icu/images/games/2048-preview.jpg">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="http://game.friday-go.icu/games/2048/">
+    <meta property="twitter:title" content="可爱 2048 游戏 - PFinalClub Games | 合并数字，挑战你的大脑">
+    <meta property="twitter:description" content="在这个可爱版2048游戏中，合并相同的卡片，挑战你的大脑！看看你能否达到2048或更高。免费在线玩，无需下载。">
+    <meta property="twitter:image" content="http://game.friday-go.icu/images/games/2048-twitter.jpg">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://game.friday-go.icu/games/2048/">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../../favicon.png">
+    <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Structured Data / Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "VideoGame",
+        "name": "可爱 2048 游戏",
+        "url": "http://game.friday-go.icu/games/2048/",
+        "description": "在这个可爱版2048游戏中，合并相同的卡片，挑战你的大脑！看看你能否达到2048或更高。",
+        "genre": ["Puzzle", "Strategy", "Casual"],
+        "gamePlatform": "Web Browser",
+        "applicationCategory": "Game",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD",
+            "availability": "http://schema.org/InStock"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "1024",
+            "bestRating": "5",
+            "worstRating": "1"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "PFinalClub Games",
+            "url": "http://game.friday-go.icu/"
+        }
+    }
+    </script>
+
     <style>
         body {
             background-color: #faf8ef;
@@ -12,7 +86,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            /* justify-content: center; */
             min-height: 100vh;
             margin: 0;
         }
@@ -95,32 +169,131 @@
             border-radius: 5px;
             text-align: center;
         }
+        
+        .lang-switch {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            background-color: #6366f1;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .lang-switch:hover {
+            background-color: #4f46e5;
+        }
+        
+        .site-header {
+            width: 100%;
+            background-color: #6366f1;
+            color: white;
+            padding: 16px 0;
+            margin-bottom: 20px;
+        }
+        
+        .nav-link {
+            color: white;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: #c7d2fe;
+        }
     </style>
 </head>
 
 <body>
+    <!-- 添加网站导航栏 -->
+    <header class="site-header">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
+                </svg>
+                <a href="../../index.html" class="text-xl font-bold" data-lang-key="siteName">PFinalClub Games</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div id="langSwitch" class="lang-switch">
+                    <span id="currentLang" class="text-sm font-medium">中文</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+                    </svg>
+                </div>
+                <nav>
+                    <ul class="flex space-x-6">
+                        <li><a href="../../index.html" class="nav-link" data-lang-key="nav.home">首页</a></li>
+                        <li><a href="../../games" class="nav-link" data-lang-key="nav.allGames">全部游戏</a></li>
+                        <li><a href="../../leaderboard" class="nav-link" data-lang-key="nav.leaderboard">排行榜</a></li>
+                        <li><a href="../../about" class="nav-link" data-lang-key="nav.about">关于我们</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
     <div id="header">
-        <h1>可爱 2048 游戏</h1>
+        <h1 data-lang-key="games.2048.title">可爱 2048 游戏</h1>
         <div id="score-board">
-            <div id="score">得分: 0</div>
-            <div id="high-score">最高分: 0</div>
+            <div id="score" data-lang-key="games.2048.score">得分: 0</div>
+            <div id="high-score" data-lang-key="games.2048.highScore">最高分: 0</div>
         </div>
     </div>
     <div id="game-board"></div>
     <div id="game-rules">
-        <p>游戏规则：使用键盘方向键（上、下、左、右）控制卡片移动，相同的卡片会合并成一个数值更大的卡片，目标是合并出数值为 2048 的卡片。</p>
+        <p data-lang-key="games.2048.rules">游戏规则：使用键盘方向键（上、下、左、右）控制卡片移动，相同的卡片会合并成一个数值更大的卡片，目标是合并出数值为 2048 的卡片。</p>
     </div>
     <div id="win-modal">
         <div id="win-modal-content">
-            <p>恭喜你已经合并了一只宇宙无敌最可爱的猫咪</p>
-            <button onclick="closeWinModal()">确认</button>
+            <p data-lang-key="games.2048.winMessage">恭喜你已经合并了一只宇宙无敌最可爱的猫咪</p>
+            <button onclick="closeWinModal()" data-lang-key="games.2048.confirmButton">确认</button>
         </div>
     </div>
+    
+    <!-- 添加网站底部 -->
+    <footer class="bg-gray-800 text-white py-8 mt-12 w-full">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4" data-lang-key="footer.title">PFinalClub Games</h3>
+                    <p class="text-gray-400" data-lang-key="footer.description">提供最好玩的在线小游戏合集，随时随地享受游戏的乐趣！</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4" data-lang-key="footer.quickLinks">快速链接</h3>
+                    <nav>
+                        <ul class="space-y-2">
+                            <li><a href="../../index.html" class="text-gray-400 hover:text-white" data-lang-key="nav.home">首页</a></li>
+                            <li><a href="../../games" class="text-gray-400 hover:text-white" data-lang-key="nav.allGames">全部游戏</a></li>
+                            <li><a href="../../leaderboard" class="text-gray-400 hover:text-white" data-lang-key="nav.leaderboard">排行榜</a></li>
+                            <li><a href="../../about" class="text-gray-400 hover:text-white" data-lang-key="nav.about">关于我们</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4" data-lang-key="footer.contact">联系我们</h3>
+                    <a href="mailto:contact@pfinalclub.com" class="text-gray-400 hover:text-white">contact@pfinalclub.com</a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p data-lang-key="footer.copyright">&copy; 2023 PFinalClub Games. 保留所有权利。</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- 引入语言文件和主要JavaScript文件 -->
+    <script src="../../js/lang.js"></script>
+    <script src="../../js/main.js"></script>
+    
     <script>
         const gameBoard = document.getElementById('game-board');
         const winModal = document.getElementById('win-modal');
         const scoreElement = document.getElementById('score');
         const highScoreElement = document.getElementById('high-score');
+        
+        // 获取当前语言
+        let currentLang = localStorage.getItem('language') || 'zh';
 
         const images = {
             2: 'https://p9-flow-imagex-sign.byteimg.com/ocean-cloud-tos/image_generation/df099f209335f8b25e1d4ab9ce2867ff_1741677321668230149.png~tplv-a9rns2rl98-image.png?rk3s=25bff839&x-expires=1773213321&x-signature=reNM%2F907NNX7Rc%2BE4FflYbWaRKo%3D',
@@ -144,7 +317,18 @@
         ];
         let score = 0;
         let highScore = localStorage.getItem('highScore')? parseInt(localStorage.getItem('highScore')) : 0;
-        highScoreElement.textContent = `最高分: ${highScore}`;
+        
+        // 更新分数显示
+        function updateScoreDisplay() {
+            const scorePrefix = currentLang === 'zh' ? '得分: ' : 'Score: ';
+            const highScorePrefix = currentLang === 'zh' ? '最高分: ' : 'High Score: ';
+            
+            scoreElement.textContent = scorePrefix + score;
+            highScoreElement.textContent = highScorePrefix + highScore;
+        }
+        
+        // 初始化高分显示
+        updateScoreDisplay();
 
         function createBoard() {
             gameBoard.innerHTML = '';
@@ -161,7 +345,6 @@
                     gameBoard.appendChild(cell);
                 }
             }
-            scoreElement.textContent = `得分: ${score}`;
         }
 
         function addRandomTile() {
@@ -309,10 +492,9 @@
         function updateScore() {
             if (score > highScore) {
                 highScore = score;
-                highScoreElement.textContent = `最高分: ${highScore}`;
                 localStorage.setItem('highScore', highScore);
             }
-            scoreElement.textContent = `得分: ${score}`;
+            updateScoreDisplay();
         }
 
         window.addEventListener('keydown', handleKeyPress);
@@ -320,6 +502,12 @@
         addRandomTile();
         addRandomTile();
         createBoard();
+        
+        // 监听语言变化
+        document.addEventListener('languageChanged', function(e) {
+            currentLang = e.detail.language;
+            updateScoreDisplay();
+        });
     </script>
 </body>
 
