@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>俄罗斯方块 - PFinalClub Games | 经典益智游戏</title>
+    <meta name="description" content="在 PFinalClub 玩经典俄罗斯方块游戏，挑战你的反应和策略！免费在线玩，无需下载。">
+    <meta name="keywords" content="俄罗斯方块, tetris, 益智游戏, 在线游戏, 免费游戏, 经典游戏">
+    <meta name="author" content="PFinalClub">
+    <meta name="robots" content="index, follow">
+    <meta name="google" content="notranslate">
+    <link rel="icon" type="image/png" href="../../favicon.png">
+    <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #faf8ef;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        #header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            max-width: 500px;
+            color: #776e65;
+        }
+        #score-board {
+            display: flex;
+            gap: 10px;
+        }
+        #score, #high-score {
+            background-color: #bbada0;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        #game-board {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            grid-template-rows: repeat(20, 1fr);
+            gap: 2px;
+            background-color: #bbada0;
+            padding: 10px;
+            border-radius: 5px;
+            width: 90%;
+            max-width: 320px;
+            aspect-ratio: 10/20;
+            margin: 20px 0;
+        }
+        .cell {
+            background-color: rgba(238, 228, 218, 0.35);
+            border-radius: 2px;
+            aspect-ratio: 1/1;
+        }
+        .block {
+            width: 100%;
+            height: 100%;
+            border-radius: 2px;
+        }
+        #game-rules {
+            text-align: left;
+            color: #776e65;
+            width: 90%;
+            max-width: 500px;
+            font-size: 14px;
+        }
+        #win-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+        }
+        #win-modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .lang-switch {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            background-color: #6366f1;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .lang-switch:hover {
+            background-color: #4f46e5;
+        }
+        .site-header {
+            width: 100%;
+            background-color: #6366f1;
+            color: white;
+            padding: 16px 0;
+            margin-bottom: 20px;
+        }
+        .nav-link {
+            color: white;
+            transition: color 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="site-header">
+        <div id="header">
+            <h1 data-lang-key="games.tetris.title">俄罗斯方块</h1>
+            <div id="score-board">
+                <div id="score" data-lang-key="games.2048.score">分数: 0</div>
+                <div id="high-score" data-lang-key="games.2048.highScore">最高: 0</div>
+            </div>
+        </div>
+        <div style="width:90%;max-width:500px;display:flex;justify-content:space-between;align-items:center;margin:10px 0;">
+            <div id="langSwitch" class="lang-switch">
+                <span id="currentLang">中文</span>
+            </div>
+            <nav>
+                <a href="/" class="nav-link" data-lang-key="nav.home">首页</a>
+                <a href="/games" class="nav-link" data-lang-key="nav.allGames">全部游戏</a>
+                <a href="/about" class="nav-link" data-lang-key="nav.about">关于我们</a>
+            </nav>
+        </div>
+    </div>
+    <div id="game-board"></div>
+    <div style="margin:10px 0;">
+        <button onclick="restartGame()" class="lang-switch" data-lang-key="games.snake.restartButton">重新开始</button>
+    </div>
+    <div id="game-rules">
+        <h3 data-lang-key="games.tetris.title">玩法说明</h3>
+        <ul>
+            <li data-lang-key="games.tetris.desc">使用键盘方向键控制方块移动和旋转。填满一行即可消除得分。游戏结束时会弹窗提示。</li>
+        </ul>
+    </div>
+    <div id="win-modal">
+        <div id="win-modal-content">
+            <h2 id="modal-title" data-lang-key="games.snake.gameOver">游戏结束</h2>
+            <p id="modal-msg"><span data-lang-key="games.snake.finalScore">你的得分：</span><span id="final-score">0</span></p>
+            <button onclick="restartGame()" class="lang-switch" data-lang-key="games.snake.playAgain">再来一局</button>
+        </div>
+    </div>
+    <script src="../../js/lang.js"></script>
+    <script src="../../js/main.js"></script>
+    <script src="tetris.js"></script>
+</body>
+</html> 
