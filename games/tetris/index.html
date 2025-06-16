@@ -113,32 +113,92 @@
             transition: color 0.3s;
         }
     </style>
+    <!-- SEO & 社交分享优化 -->
+    <meta name="title" content="俄罗斯方块 - PFinalClub Games | 经典益智游戏">
+    <meta name="description" content="经典的俄罗斯方块游戏，旋转和移动方块以完成行。免费在线玩，无需下载。">
+    <!-- Hreflang Tags for Language Alternatives -->
+    <link rel="alternate" hreflang="en" href="http://game.friday-go.icu/en/games/tetris/" />
+    <link rel="alternate" hreflang="zh" href="http://game.friday-go.icu/zh/games/tetris/" />
+    <link rel="alternate" hreflang="x-default" href="http://game.friday-go.icu/games/tetris/" />
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://game.friday-go.icu/games/tetris/">
+    <meta property="og:title" content="俄罗斯方块 - PFinalClub Games | 经典益智游戏">
+    <meta property="og:description" content="经典的俄罗斯方块游戏，旋转和移动方块以完成行。免费在线玩，无需下载。">
+    <meta property="og:image" content="http://game.friday-go.icu/static/image/og-tetris.jpg">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="http://game.friday-go.icu/games/tetris/">
+    <meta property="twitter:title" content="俄罗斯方块 - PFinalClub Games | 经典益智游戏">
+    <meta property="twitter:description" content="经典的俄罗斯方块游戏，旋转和移动方块以完成行。免费在线玩，无需下载。">
+    <meta property="twitter:image" content="http://game.friday-go.icu/static/image/og-tetris.jpg">
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://game.friday-go.icu/games/tetris/">
+    <!-- Structured Data / Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "VideoGame",
+        "name": "俄罗斯方块",
+        "url": "http://game.friday-go.icu/games/tetris/",
+        "description": "经典的俄罗斯方块游戏，旋转和移动方块以完成行。",
+        "genre": ["Puzzle", "Arcade"],
+        "gamePlatform": "Web Browser",
+        "applicationCategory": "Game",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD",
+            "availability": "http://schema.org/InStock"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "PFinalClub Games",
+            "url": "http://game.friday-go.icu/"
+        }
+    }
+    </script>
 </head>
 <body>
-    <div class="site-header">
-        <div id="header">
-            <h1 data-lang-key="games.tetris.title">俄罗斯方块</h1>
-            <div id="score-board">
-                <div id="score" data-lang-key="games.2048.score">分数: 0</div>
-                <div id="high-score" data-lang-key="games.2048.highScore">最高: 0</div>
-            </div>
+  <!-- Header -->
+  <header class="bg-indigo-600 text-white shadow-md w-full">
+    <div class="flex justify-between items-center px-4 py-4 w-full max-w-none">
+        <div class="flex items-center space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
+            </svg>
+            <span class="text-xl font-bold" data-lang-key="siteName">PFinalClub Games</span>
         </div>
-        <div style="width:90%;max-width:500px;display:flex;justify-content:space-between;align-items:center;margin:10px 0;">
+        <div class="flex items-center space-x-4">
             <div id="langSwitch" class="lang-switch">
-                <span id="currentLang">中文</span>
+                <span id="currentLang" class="text-sm font-medium">中文</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+                </svg>
             </div>
             <nav>
-                <a href="/" class="nav-link" data-lang-key="nav.home">首页</a>
-                <a href="/games" class="nav-link" data-lang-key="nav.allGames">全部游戏</a>
-                <a href="/about" class="nav-link" data-lang-key="nav.about">关于我们</a>
+                <ul class="flex space-x-6">
+                    <li><a href="../../" class="hover:text-indigo-200" data-lang-key="nav.home">首页</a></li>
+                    <li><a href="../../games/" class="hover:text-indigo-200" data-lang-key="nav.allGames">全部游戏</a></li>
+                    <li><a href="../../leaderboard/" class="hover:text-indigo-200" data-lang-key="nav.leaderboard">排行榜</a></li>
+                    <li><a href="../../about/" class="hover:text-indigo-200" data-lang-key="nav.about">关于我们</a></li>
+                </ul>
             </nav>
         </div>
+    </div>
+</header>
+    <div id="score-board" style="display:flex;gap:10px;justify-content:center;margin:10px 0;">
+        <div id="score" data-lang-key="games.2048.score">0</div>
+        <div id="high-score" data-lang-key="games.2048.highScore">0</div>
     </div>
     <div id="game-board"></div>
     <div style="margin:10px 0;">
         <button onclick="restartGame()" class="lang-switch" data-lang-key="games.snake.restartButton">重新开始</button>
     </div>
-    <div id="game-rules">
+    <div id="game-rules" class="mb-8">
         <h3 data-lang-key="games.tetris.title">玩法说明</h3>
         <ul>
             <li data-lang-key="games.tetris.desc">使用键盘方向键控制方块移动和旋转。填满一行即可消除得分。游戏结束时会弹窗提示。</li>
@@ -154,5 +214,60 @@
     <script src="../../js/lang.js"></script>
     <script src="../../js/main.js"></script>
     <script src="tetris.js"></script>
+    <!-- 加一个 广告 frame 左边 长条 --->
+    <script>(function(d,z,s){s.src='https://'+d+'/401/'+z;try{(document.body||document.documentElement).appendChild(s)}catch(e){}})('gizokraijaw.net',9331161,document.createElement('script'))</script>
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 w-full" itemscope itemtype="https://schema.org/WPFooter">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4" data-lang-key="footer.title" itemprop="name">PFinalClub Games</h3>
+                    <p class="text-gray-400" data-lang-key="footer.description" itemprop="description">提供最好玩的在线小游戏合集，随时随地享受游戏的乐趣！</p>
+                    <div class="mt-4 flex space-x-3">
+                        <a href="https://twitter.com/friday_go_icu" aria-label="Twitter" class="text-gray-400 hover:text-white">
+                            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold mb-4" data-lang-key="footer.quickLinks">快速链接</h3>
+                    <nav aria-label="Footer Navigation">
+                        <ul class="space-y-2" itemscope itemtype="https://schema.org/SiteNavigationElement">
+                            <li itemprop="name"><a href="../../" class="text-gray-400 hover:text-white" data-lang-key="nav.home" itemprop="url">首页</a></li>
+                            <li itemprop="name"><a href="../../games/" class="text-gray-400 hover:text-white" data-lang-key="nav.allGames" itemprop="url">全部游戏</a></li>
+                            <li itemprop="name"><a href="../../leaderboard/" class="text-gray-400 hover:text-white" data-lang-key="nav.leaderboard" itemprop="url">排行榜</a></li>
+                            <li itemprop="name"><a href="../../about/" class="text-gray-400 hover:text-white" data-lang-key="nav.about" itemprop="url">关于我们</a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold mb-4" data-lang-key="footer.contact">联系我们</h3>
+                    <p class="text-gray-400 mb-2" data-lang-key="footer.contactText">有任何问题或建议？请联系我们！</p>
+                    <a href="mailto:contact@pfinalclub.com" class="text-indigo-400 hover:text-indigo-300" itemprop="email">contact@pfinalclub.com</a>
+                    <div class="mt-4">
+                        <p class="text-gray-400 text-sm">
+                            <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                                <span itemprop="addressLocality">北京市</span>,
+                                <span itemprop="addressRegion">朝阳区</span>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p data-lang-key="footer.copyright">&copy; 2023 PFinalClub Games. 保留所有权利。</p>
+                <p class="mt-2 text-sm">
+                    <a href="../../terms/" class="text-gray-500 hover:text-gray-300 mx-2" data-lang-key="terms">使用条款</a>
+                    <a href="../../privacy-policy/" class="text-gray-500 hover:text-gray-300 mx-2" data-lang-key="privacy">隐私政策</a>
+                    <a href="../../cookies/" class="text-gray-500 hover:text-gray-300 mx-2" data-lang-key="cookies">Cookie 政策</a>
+                </p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html> 
