@@ -39,8 +39,8 @@
     <link rel="canonical" href="http://game.friday-go.icu/games/">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="../favicon.png">
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 
     <!-- Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -49,26 +49,70 @@
     <style type="text/tailwindcss">
         @layer components {
             .game-card {
-                @apply bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:shadow-xl hover:-translate-y-1;
+                @apply bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border border-gray-100;
             }
             .game-card-img {
-                @apply w-full h-48 object-cover;
+                @apply w-full h-48 object-cover transition-transform duration-300;
+            }
+            .game-card:hover .game-card-img {
+                @apply scale-105;
             }
             .btn-play {
-                @apply px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors;
+                @apply px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 font-semibold shadow-md hover:shadow-lg transform hover:scale-105;
             }
             .lang-switch {
                 @apply flex items-center space-x-1 px-3 py-1 rounded-full bg-indigo-700 hover:bg-indigo-800 transition-colors cursor-pointer;
             }
             .category-filter {
-                @apply px-4 py-2 rounded-lg text-sm font-medium transition-colors;
+                @apply px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 border-2;
             }
             .category-filter.active {
-                @apply bg-indigo-600 text-white;
+                @apply bg-gradient-to-r from-indigo-600 to-purple-600 text-white border-indigo-600 shadow-md;
             }
             .category-filter:not(.active) {
-                @apply bg-gray-200 text-gray-700 hover:bg-gray-300;
+                @apply bg-white text-gray-700 border-gray-200 hover:border-indigo-300 hover:bg-indigo-50;
             }
+            .search-container {
+                @apply relative max-w-2xl mx-auto;
+            }
+            .search-input {
+                @apply w-full px-6 py-4 pl-12 pr-16 border-2 border-gray-200 rounded-full focus:outline-none focus:ring-4 focus:ring-indigo-100 focus:border-indigo-500 transition-all duration-300 text-lg;
+            }
+            .search-button {
+                @apply absolute right-3 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white p-3 rounded-full hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 shadow-md hover:shadow-lg;
+            }
+            .hero-gradient {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            }
+            .stats-card {
+                @apply bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-4 text-center border border-white border-opacity-20;
+            }
+            .floating-shapes {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                z-index: 0;
+            }
+            .floating-shape {
+                position: absolute;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 50%;
+                animation: float 6s ease-in-out infinite;
+            }
+            @keyframes float {
+                0%, 100% { transform: translateY(0px) rotate(0deg); }
+                50% { transform: translateY(-20px) rotate(180deg); }
+            }
+            .game-stats {
+                @apply flex items-center justify-between text-sm text-gray-500 mt-3 pt-3 border-t border-gray-100;
+            }
+            .difficulty-badge {
+                @apply px-2 py-1 rounded-full text-xs font-medium;
+            }
+            .difficulty-easy { @apply bg-green-100 text-green-800; }
+            .difficulty-medium { @apply bg-yellow-100 text-yellow-800; }
+            .difficulty-hard { @apply bg-red-100 text-red-800; }
         }
     </style>
 
@@ -97,49 +141,88 @@
     }
     </script>
 </head>
-<body class="bg-gray-100">
+<body class="bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen">
     <!-- Header -->
-    <header class="bg-indigo-600 text-white shadow-md">
+    <header class="bg-white shadow-lg sticky top-0 z-50">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
-                </svg>
-                <span class="text-xl font-bold" data-lang-key="siteName">PFinalClub Games</span>
+            <div class="flex items-center space-x-3">
+                <div class="bg-gradient-to-r from-indigo-600 to-purple-600 p-2 rounded-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
+                    </svg>
+                </div>
+                <span class="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent" data-lang-key="siteName">PFinalClub Games</span>
             </div>
-            <div class="flex items-center space-x-4">
+            <div class="flex items-center space-x-6">
                 <div id="langSwitch" class="lang-switch">
                     <span id="currentLang" class="text-sm font-medium">中文</span>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
                     </svg>
                 </div>
-                <nav>
-                    <ul class="flex space-x-6">
-                        <li><a href="../index.html" class="hover:text-indigo-200" data-lang-key="nav.home">首页</a></li>
-                        <li><a href="../games" class="hover:text-indigo-200" data-lang-key="nav.allGames">全部游戏</a></li>
-                        <li><a href="../leaderboard" class="hover:text-indigo-200" data-lang-key="nav.leaderboard">排行榜</a></li>
-                        <li><a href="../about" class="hover:text-indigo-200" data-lang-key="nav.about">关于我们</a></li>
+                <nav class="hidden md:block">
+                    <ul class="flex space-x-8">
+                        <li><a href="../index.html" class="text-gray-700 hover:text-indigo-600 transition-colors font-medium" data-lang-key="nav.home">首页</a></li>
+                        <li><a href="../games" class="text-indigo-600 font-semibold" data-lang-key="nav.allGames">全部游戏</a></li>
+                        <li><a href="../leaderboard" class="text-gray-700 hover:text-indigo-600 transition-colors font-medium" data-lang-key="nav.leaderboard">排行榜</a></li>
+                        <li><a href="../about" class="text-gray-700 hover:text-indigo-600 transition-colors font-medium" data-lang-key="nav.about">关于我们</a></li>
                     </ul>
                 </nav>
             </div>
         </div>
     </header>
 
-    <!-- Hero Section for Games Page -->
-    <section class="bg-indigo-700 text-white py-12">
-        <div class="container mx-auto px-4 text-center">
-            <h1 class="text-4xl font-bold mb-4" data-lang-key="games.allGames.title">全部游戏</h1>
-            <p class="text-xl mb-8 max-w-2xl mx-auto" data-lang-key="games.allGames.subtitle">探索我们的游戏合集，找到您喜欢的游戏并立即开始游戏！</p>
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white py-20 relative overflow-hidden">
+        <div class="floating-shapes">
+            <div class="floating-shape w-20 h-20 top-10 left-10"></div>
+            <div class="floating-shape w-16 h-16 top-20 right-20"></div>
+            <div class="floating-shape w-12 h-12 bottom-20 left-1/4"></div>
+            <div class="floating-shape w-24 h-24 bottom-10 right-10"></div>
+        </div>
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <h1 class="text-5xl md:text-6xl font-bold mb-6" data-lang-key="games.allGames.title">全部游戏</h1>
+            <p class="text-xl md:text-2xl mb-12 max-w-3xl mx-auto opacity-90" data-lang-key="games.allGames.subtitle">探索我们的游戏合集，找到您喜欢的游戏并立即开始游戏！</p>
+            
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-12">
+                <div class="stats-card">
+                    <div class="text-3xl font-bold mb-2" id="totalGames">8</div>
+                    <div class="text-sm opacity-80" data-lang-key="games.stats.total">总游戏数</div>
+                </div>
+                <div class="stats-card">
+                    <div class="text-3xl font-bold mb-2" id="activeCategory">全部</div>
+                    <div class="text-sm opacity-80" data-lang-key="games.stats.category">当前分类</div>
+                </div>
+                <div class="stats-card">
+                    <div class="text-3xl font-bold mb-2" id="searchResults">8</div>
+                    <div class="text-sm opacity-80" data-lang-key="games.stats.results">搜索结果</div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Main Content -->
-    <div class="container mx-auto px-4 py-8">
+    <div class="container mx-auto px-4 py-12">
+        <!-- Search Bar -->
+        <div class="mb-12">
+            <div class="search-container">
+                <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                <input type="text" id="gameSearch" placeholder="搜索游戏..." data-lang-placeholder="games.search.placeholder" class="search-input">
+                <button id="searchButton" class="search-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
         <!-- Category Filters -->
-        <div class="mb-8">
-            <h2 class="text-2xl font-bold mb-4 text-gray-800" data-lang-key="games.categories">游戏分类</h2>
-            <div class="flex flex-wrap gap-2">
+        <div class="mb-12">
+            <h2 class="text-3xl font-bold mb-6 text-gray-800 text-center" data-lang-key="games.categories">游戏分类</h2>
+            <div class="flex flex-wrap justify-center gap-3">
                 <button class="category-filter active" data-category="all" data-lang-key="games.category.all">全部</button>
                 <button class="category-filter" data-category="puzzle" data-lang-key="games.category.puzzle">益智</button>
                 <button class="category-filter" data-category="arcade" data-lang-key="games.category.arcade">街机</button>
@@ -150,39 +233,38 @@
                 <button class="category-filter" data-category="popular" data-lang-key="games.category.popular">热门</button>
             </div>
         </div>
-        
-        <!-- Search Bar -->
-        <div class="mb-8">
-            <div class="relative">
-                <input type="text" id="gameSearch" placeholder="搜索游戏..." data-lang-placeholder="games.search.placeholder" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                <button id="searchButton" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-indigo-600 text-white p-1 rounded-md hover:bg-indigo-700">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                </button>
-            </div>
-        </div>
 
         <!-- Games Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="gamesGrid">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8" id="gamesGrid">
             <!-- Game cards will be dynamically generated here -->
+        </div>
+
+        <!-- No Results Message -->
+        <div id="noResults" class="hidden text-center py-16">
+            <div class="max-w-md mx-auto">
+                <svg class="mx-auto h-24 w-24 text-gray-300 mb-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.47-.881-6.08-2.33" />
+                </svg>
+                <h3 class="text-xl font-semibold text-gray-600 mb-2" data-lang-key="games.search.noResults">没有找到符合条件的游戏</h3>
+                <p class="text-gray-500" data-lang-key="games.search.tryDifferent">请尝试不同的搜索词或分类</p>
+            </div>
         </div>
     </div>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8 mt-12" itemscope itemtype="https://schema.org/WPFooter">
+    <footer class="bg-gray-900 text-white py-12 mt-20" itemscope itemtype="https://schema.org/WPFooter">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
                     <h3 class="text-xl font-bold mb-4" data-lang-key="footer.title" itemprop="name">PFinalClub Games</h3>
                     <p class="text-gray-400" data-lang-key="footer.description" itemprop="description">提供最好玩的在线小游戏合集，随时随地享受游戏的乐趣！</p>
                     <div class="mt-4 flex space-x-3">
-                        <a href="https://twitter.com/friday_go_icu" aria-label="Twitter" class="text-gray-400 hover:text-white">
+                        <a href="https://twitter.com/friday_go_icu" aria-label="Twitter" class="text-gray-400 hover:text-white transition-colors">
                             <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                 <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
                             </svg>
                         </a>
-                        <a href="https://github.com/friday-go-icu" aria-label="GitHub" class="text-gray-400 hover:text-white">
+                        <a href="https://github.com/friday-go-icu" aria-label="GitHub" class="text-gray-400 hover:text-white transition-colors">
                             <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                 <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path>
                             </svg>
@@ -194,12 +276,12 @@
                     <h3 class="text-xl font-bold mb-4" data-lang-key="footer.quickLinks">快速链接</h3>
                     <nav aria-label="Footer Navigation">
                         <ul class="space-y-2" itemscope itemtype="https://schema.org/SiteNavigationElement">
-                            <li itemprop="name"><a href="../index.html" class="text-gray-400 hover:text-white" data-lang-key="nav.home" itemprop="url">首页</a></li>
-                            <li itemprop="name"><a href="../games" class="text-gray-400 hover:text-white" data-lang-key="nav.allGames" itemprop="url">全部游戏</a></li>
-                            <li itemprop="name"><a href="../leaderboard" class="text-gray-400 hover:text-white" data-lang-key="nav.leaderboard" itemprop="url">排行榜</a></li>
-                            <li itemprop="name"><a href="../about" class="text-gray-400 hover:text-white" data-lang-key="nav.about" itemprop="url">关于我们</a></li>
-                            <li itemprop="name"><a href="../sitemap.xml" class="text-gray-400 hover:text-white" data-lang-key="sitemap" itemprop="url">网站地图</a></li>
-                            <li itemprop="name"><a href="../privacy-policy" class="text-gray-400 hover:text-white" data-lang-key="privacy" itemprop="url">隐私政策</a></li>
+                            <li itemprop="name"><a href="../index.html" class="text-gray-400 hover:text-white transition-colors" data-lang-key="nav.home" itemprop="url">首页</a></li>
+                            <li itemprop="name"><a href="../games" class="text-gray-400 hover:text-white transition-colors" data-lang-key="nav.allGames" itemprop="url">全部游戏</a></li>
+                            <li itemprop="name"><a href="../leaderboard" class="text-gray-400 hover:text-white transition-colors" data-lang-key="nav.leaderboard" itemprop="url">排行榜</a></li>
+                            <li itemprop="name"><a href="../about" class="text-gray-400 hover:text-white transition-colors" data-lang-key="nav.about" itemprop="url">关于我们</a></li>
+                            <li itemprop="name"><a href="../sitemap.xml" class="text-gray-400 hover:text-white transition-colors" data-lang-key="sitemap" itemprop="url">网站地图</a></li>
+                            <li itemprop="name"><a href="../privacy-policy" class="text-gray-400 hover:text-white transition-colors" data-lang-key="privacy" itemprop="url">隐私政策</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -207,7 +289,7 @@
                 <div>
                     <h3 class="text-xl font-bold mb-4" data-lang-key="footer.contact">联系我们</h3>
                     <p class="text-gray-400 mb-2" data-lang-key="footer.contactText">有任何问题或建议？请联系我们！</p>
-                    <a href="mailto:lampxiezi@gmail.com" class="text-indigo-400 hover:text-indigo-300" itemprop="email">lampxiezi@gmail.com</a>
+                    <a href="mailto:lampxiezi@gmail.com" class="text-indigo-400 hover:text-indigo-300 transition-colors" itemprop="email">lampxiezi@gmail.com</a>
                     <div class="mt-4">
                         <p class="text-gray-400 text-sm">
                             <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
@@ -222,9 +304,9 @@
             <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
                 <p data-lang-key="footer.copyright">&copy; 2023 PFinalClub Games. 保留所有权利。</p>
                 <p class="mt-2 text-sm">
-                    <a href="../terms" class="text-gray-500 hover:text-gray-300 mx-2" data-lang-key="terms">使用条款</a>
-                    <a href="../privacy-policy" class="text-gray-500 hover:text-gray-300 mx-2" data-lang-key="privacy">隐私政策</a>
-                    <a href="../cookies" class="text-gray-500 hover:text-gray-300 mx-2" data-lang-key="cookies">Cookie 政策</a>
+                    <a href="../terms" class="text-gray-500 hover:text-gray-300 mx-2 transition-colors" data-lang-key="terms">使用条款</a>
+                    <a href="../privacy-policy" class="text-gray-500 hover:text-gray-300 mx-2 transition-colors" data-lang-key="privacy">隐私政策</a>
+                    <a href="../cookies" class="text-gray-500 hover:text-gray-300 mx-2 transition-colors" data-lang-key="cookies">Cookie 政策</a>
                 </p>
             </div>
         </div>
@@ -242,19 +324,39 @@
             const gamesGrid = document.getElementById('gamesGrid');
             const searchInput = document.getElementById('gameSearch');
             const searchButton = document.getElementById('searchButton');
+            const noResults = document.getElementById('noResults');
             const currentLang = localStorage.getItem('language') || 'en';
             
             let currentCategory = 'all';
             let searchQuery = '';
             
+            // Function to get difficulty class
+            function getDifficultyClass(difficulty) {
+                switch(difficulty) {
+                    case 'easy': return 'difficulty-easy';
+                    case 'medium': return 'difficulty-medium';
+                    case 'hard': return 'difficulty-hard';
+                    default: return 'difficulty-medium';
+                }
+            }
+            
+            // Function to get difficulty text
+            function getDifficultyText(difficulty, lang) {
+                const texts = {
+                    easy: { zh: '简单', en: 'Easy' },
+                    medium: { zh: '中等', en: 'Medium' },
+                    hard: { zh: '困难', en: 'Hard' }
+                };
+                return texts[difficulty]?.[lang] || texts.medium[lang];
+            }
+            
             // Function to render game cards
             function renderGameCards(games) {
                 gamesGrid.innerHTML = '';
+                noResults.classList.add('hidden');
                 
                 if (games.length === 0) {
-                    gamesGrid.innerHTML = `<div class="col-span-3 text-center py-8">
-                        <p class="text-gray-500 text-lg">${currentLang === 'zh' ? '没有找到符合条件的游戏' : 'No games found matching your criteria'}</p>
-                    </div>`;
+                    noResults.classList.remove('hidden');
                     return;
                 }
                 
@@ -265,31 +367,55 @@
                     
                     let tagsHtml = '';
                     if (game.tags.includes('hot')) {
-                        tagsHtml += `<span class="absolute top-2 right-2 bg-yellow-400 text-xs font-bold px-2 py-1 rounded-full" data-lang-key="games.hot">${currentLang === 'zh' ? '热门' : 'Hot'}</span>`;
+                        tagsHtml += `<span class="absolute top-3 right-3 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md" data-lang-key="games.hot">${currentLang === 'zh' ? '热门' : 'Hot'}</span>`;
                     }
                     if (game.tags.includes('new')) {
-                        tagsHtml += `<span class="absolute top-2 right-2 bg-green-400 text-xs font-bold px-2 py-1 rounded-full" data-lang-key="games.new">${currentLang === 'zh' ? '新游戏' : 'New'}</span>`;
+                        tagsHtml += `<span class="absolute top-3 right-3 bg-gradient-to-r from-green-400 to-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md" data-lang-key="games.new">${currentLang === 'zh' ? '新游戏' : 'New'}</span>`;
                     }
                     if (game.tags.includes('coming-soon')) {
-                        tagsHtml += `<span class="absolute top-2 right-2 bg-purple-400 text-xs font-bold px-2 py-1 rounded-full">${currentLang === 'zh' ? '即将推出' : 'Coming Soon'}</span>`;
+                        tagsHtml += `<span class="absolute top-3 right-3 bg-gradient-to-r from-purple-400 to-pink-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">${currentLang === 'zh' ? '即将推出' : 'Coming Soon'}</span>`;
                     }
                     
                     const gameCard = `
-                        <div class="game-card" data-categories="${categoriesAttr}">
-                            <div class="relative">
+                        <div class="game-card group" data-categories="${categoriesAttr}">
+                            <div class="relative overflow-hidden">
                                 <img src="${game.image}" alt="${gameName}" class="game-card-img">
                                 ${tagsHtml}
+                                <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300"></div>
                             </div>
-                            <div class="p-4">
-                                <h3 class="text-xl font-bold mb-2">${gameName}</h3>
-                                <p class="text-gray-600 mb-4">${gameDesc}</p>
-                                <a href="${game.url}" class="btn-play inline-block" data-lang-key="games.playButton">${currentLang === 'zh' ? '开始游戏' : 'Play Now'}</a>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold mb-3 text-gray-800 group-hover:text-indigo-600 transition-colors">${gameName}</h3>
+                                <p class="text-gray-600 mb-4 leading-relaxed">${gameDesc}</p>
+                                <div class="game-stats">
+                                    <span class="difficulty-badge ${getDifficultyClass(game.difficulty)}">
+                                        ${getDifficultyText(game.difficulty, currentLang)}
+                                    </span>
+                                    <span class="text-gray-400">${game.categories.map(cat => currentLang === 'zh' ? 
+                                        (cat === 'puzzle' ? '益智' : cat === 'arcade' ? '街机' : cat === 'strategy' ? '策略' : cat === 'memory' ? '记忆' : cat === 'board' ? '棋牌' : cat === 'word' ? '文字' : cat) : 
+                                        cat.charAt(0).toUpperCase() + cat.slice(1)).join(', ')}</span>
+                                </div>
+                                <div class="mt-4">
+                                    <a href="${game.url}" class="btn-play inline-block w-full text-center" data-lang-key="games.playButton">
+                                        ${currentLang === 'zh' ? '开始游戏' : 'Play Now'}
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     `;
                     
                     gamesGrid.innerHTML += gameCard;
                 });
+                
+                // Update stats
+                updateStats(games.length);
+            }
+            
+            // Function to update stats
+            function updateStats(count) {
+                document.getElementById('searchResults').textContent = count;
+                document.getElementById('activeCategory').textContent = currentCategory === 'all' ? 
+                    (currentLang === 'zh' ? '全部' : 'All') : 
+                    currentCategory.charAt(0).toUpperCase() + currentCategory.slice(1);
             }
             
             // Function to filter games by category and search query
@@ -349,6 +475,12 @@
                     searchQuery = searchInput.value;
                     filterGames();
                 }
+            });
+            
+            // Add real-time search
+            searchInput.addEventListener('input', (event) => {
+                searchQuery = event.target.value;
+                filterGames();
             });
         });
     </script>
