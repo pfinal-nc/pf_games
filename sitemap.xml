@@ -1,111 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  <!-- 首页 -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>http://game.friday-go.icu/</loc>
-    <lastmod>2023-12-01</lastmod>
-    <changefreq>daily</changefreq>
+    <lastmod>2023-05-01</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="http://game.friday-go.icu/en/" />
     <xhtml:link rel="alternate" hreflang="zh" href="http://game.friday-go.icu/zh/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="http://game.friday-go.icu/" />
   </url>
-  
-  <!-- 游戏列表页 -->
   <url>
     <loc>http://game.friday-go.icu/games/</loc>
-    <lastmod>2023-12-01</lastmod>
-    <changefreq>daily</changefreq>
+    <lastmod>2023-05-01</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="http://game.friday-go.icu/en/games/" />
     <xhtml:link rel="alternate" hreflang="zh" href="http://game.friday-go.icu/zh/games/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="http://game.friday-go.icu/games/" />
   </url>
-  
-  <!-- 游戏页面 - 贪吃蛇 -->
-  <url>
-    <loc>http://game.friday-go.icu/games/snake/</loc>
-    <lastmod>2023-12-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="http://game.friday-go.icu/en/games/snake/" />
-    <xhtml:link rel="alternate" hreflang="zh" href="http://game.friday-go.icu/zh/games/snake/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="http://game.friday-go.icu/games/snake/" />
-  </url>
-  
-  <!-- 游戏页面 - 2048 -->
   <url>
     <loc>http://game.friday-go.icu/games/2048/</loc>
-    <lastmod>2023-12-01</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2023-05-01</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="http://game.friday-go.icu/en/games/2048/" />
     <xhtml:link rel="alternate" hreflang="zh" href="http://game.friday-go.icu/zh/games/2048/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="http://game.friday-go.icu/games/2048/" />
   </url>
-  
-  <!-- 关于我们页 -->
+  <url>
+    <loc>http://game.friday-go.icu/games/snake/</loc>
+    <lastmod>2023-05-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://game.friday-go.icu/en/games/snake/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="http://game.friday-go.icu/zh/games/snake/" />
+  </url>
+  <url>
+    <loc>http://game.friday-go.icu/games/tetris/</loc>
+    <lastmod>2023-05-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://game.friday-go.icu/en/games/tetris/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="http://game.friday-go.icu/zh/games/tetris/" />
+  </url>
+  <url>
+    <loc>http://game.friday-go.icu/games/memory/</loc>
+    <lastmod>2023-05-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://game.friday-go.icu/en/games/memory/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="http://game.friday-go.icu/zh/games/memory/" />
+  </url>
+  <url>
+    <loc>http://game.friday-go.icu/games/sudoku/</loc>
+    <lastmod>2023-05-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://game.friday-go.icu/en/games/sudoku/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="http://game.friday-go.icu/zh/games/sudoku/" />
+  </url>
+  <url>
+    <loc>http://game.friday-go.icu/games/minesweeper/</loc>
+    <lastmod>2023-05-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://game.friday-go.icu/en/games/minesweeper/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="http://game.friday-go.icu/zh/games/minesweeper/" />
+  </url>
   <url>
     <loc>http://game.friday-go.icu/about/</loc>
-    <lastmod>2023-12-01</lastmod>
+    <lastmod>2023-05-01</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="http://game.friday-go.icu/en/about/" />
     <xhtml:link rel="alternate" hreflang="zh" href="http://game.friday-go.icu/zh/about/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="http://game.friday-go.icu/about/" />
   </url>
-  
-  <!-- 联系我们页 -->
   <url>
     <loc>http://game.friday-go.icu/contact.html</loc>
-    <lastmod>2023-12-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <lastmod>2023-05-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="http://game.friday-go.icu/en/contact.html" />
     <xhtml:link rel="alternate" hreflang="zh" href="http://game.friday-go.icu/zh/contact.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="http://game.friday-go.icu/contact.html" />
   </url>
-  
-  <!-- 隐私政策页 -->
   <url>
     <loc>http://game.friday-go.icu/privacy-policy.html</loc>
-    <lastmod>2023-12-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
+    <lastmod>2023-05-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
     <xhtml:link rel="alternate" hreflang="en" href="http://game.friday-go.icu/en/privacy-policy.html" />
     <xhtml:link rel="alternate" hreflang="zh" href="http://game.friday-go.icu/zh/privacy-policy.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="http://game.friday-go.icu/privacy-policy.html" />
   </url>
-  
-  <!-- 使用条款页 -->
   <url>
     <loc>http://game.friday-go.icu/terms.html</loc>
-    <lastmod>2023-12-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
+    <lastmod>2023-05-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
     <xhtml:link rel="alternate" hreflang="en" href="http://game.friday-go.icu/en/terms.html" />
     <xhtml:link rel="alternate" hreflang="zh" href="http://game.friday-go.icu/zh/terms.html" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="http://game.friday-go.icu/terms.html" />
-  </url>
-  
-  <!-- 英文版首页 -->
-  <url>
-    <loc>http://game.friday-go.icu/en/</loc>
-    <lastmod>2023-12-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="zh" href="http://game.friday-go.icu/zh/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="http://game.friday-go.icu/" />
-  </url>
-  
-  <!-- 中文版首页 -->
-  <url>
-    <loc>http://game.friday-go.icu/zh/</loc>
-    <lastmod>2023-12-01</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="http://game.friday-go.icu/en/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="http://game.friday-go.icu/" />
   </url>
 </urlset>

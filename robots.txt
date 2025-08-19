@@ -1,0 +1,31 @@
+User-agent: *
+Allow: /
+Sitemap: http://game.friday-go.icu/sitemap.xml
+
+# Directories
+Disallow: /cgi-bin/
+Disallow: /tmp/
+Disallow: /junk/
+
+# Files
+Disallow: *.log$
+Disallow: *.tmp$
+
+# Host
+Host: game.friday-go.icu
+
+# Crawl-delay
+Crawl-delay: 10
+
+# Specific crawlers
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 10
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 10

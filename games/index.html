@@ -7,8 +7,8 @@
     <!-- Primary Meta Tags -->
     <title>All Games - PFinalClub Games | Browse Our Collection of Free Online Games</title>
     <meta name="title" content="All Games - PFinalClub Games | Browse Our Collection of Free Online Games">
-    <meta name="description" content="Explore our complete collection of free online games including 2048, Snake, Tetris, Sudoku and more. Find your favorite game and play instantly in your browser.">
-    <meta name="keywords" content="online games, browser games, free games, 2048, snake, tetris, sudoku, minesweeper, memory cards, puzzle games, casual games">
+    <meta name="description" content="Explore our complete collection of free online games including 2048, Snake, Tetris, Sudoku, Minesweeper and Memory Cards. Find your favorite game and play instantly in your browser. No downloads required.">
+    <meta name="keywords" content="online games, browser games, free games, 2048, snake, tetris, sudoku, minesweeper, memory cards, puzzle games, casual games, arcade games">
     <meta name="author" content="PFinalClub">
     <meta name="robots" content="index, follow">
     <meta name="google" content="notranslate">
@@ -120,10 +120,29 @@
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "http://game.friday-go.icu/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Games"
+            }
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
         "@type": "CollectionPage",
         "name": "All Games - PFinalClub Games",
         "url": "http://game.friday-go.icu/games/",
-        "description": "Explore our complete collection of free online games including 2048, Snake, Tetris, Sudoku and more. Find your favorite game and play instantly in your browser.",
+        "description": "Explore our complete collection of free online games including 2048, Snake, Tetris, Sudoku, Minesweeper and Memory Cards. Find your favorite game and play instantly in your browser. No downloads required.",
         "isPartOf": {
             "@type": "WebSite",
             "name": "PFinalClub Games",
@@ -137,7 +156,84 @@
                 "url": "http://game.friday-go.icu/static/image/logo.png"
             }
         },
-        "inLanguage": "en"
+        "inLanguage": "en",
+        "mainEntity": {
+            "@type": "ItemList",
+            "itemListElement": [
+                {
+                    "@type": "VideoGame",
+                    "position": 1,
+                    "name": "2048",
+                    "url": "http://game.friday-go.icu/games/2048/",
+                    "description": "Merge numbers and challenge your brain! See if you can reach 2048 or higher.",
+                    "genre": ["Puzzle", "Strategy", "Casual"],
+                    "gamePlatform": "Web Browser"
+                },
+                {
+                    "@type": "VideoGame",
+                    "position": 2,
+                    "name": "Snake",
+                    "url": "http://game.friday-go.icu/games/snake/",
+                    "description": "Classic snake game. Control the snake to eat food and avoid hitting walls or yourself.",
+                    "genre": ["Arcade", "Casual"],
+                    "gamePlatform": "Web Browser"
+                },
+                {
+                    "@type": "VideoGame",
+                    "position": 3,
+                    "name": "Tetris",
+                    "url": "http://game.friday-go.icu/games/tetris/",
+                    "description": "Classic Tetris game. Rotate and move blocks to complete rows.",
+                    "genre": ["Puzzle", "Arcade"],
+                    "gamePlatform": "Web Browser"
+                },
+                {
+                    "@type": "VideoGame",
+                    "position": 4,
+                    "name": "Memory Cards",
+                    "url": "http://game.friday-go.icu/games/memory/",
+                    "description": "Test your memory by finding all matching card pairs.",
+                    "genre": ["Puzzle", "Memory"],
+                    "gamePlatform": "Web Browser"
+                },
+                {
+                    "@type": "VideoGame",
+                    "position": 5,
+                    "name": "Sudoku",
+                    "url": "http://game.friday-go.icu/games/sudoku/",
+                    "description": "Fill the 9x9 grid so each row, column, and 3x3 box contains digits 1-9.",
+                    "genre": ["Puzzle", "Strategy"],
+                    "gamePlatform": "WebBrowser"
+                },
+                {
+                    "@type": "VideoGame",
+                    "position": 6,
+                    "name": "Minesweeper",
+                    "url": "http://game.friday-go.icu/games/minesweeper/",
+                    "description": "Classic minesweeper game. Avoid mines and clear all safe areas.",
+                    "genre": ["Puzzle", "Strategy"],
+                    "gamePlatform": "Web Browser"
+                },
+                {
+                    "@type": "VideoGame",
+                    "position": 7,
+                    "name": "Chess",
+                    "url": "http://game.friday-go.icu/games/chess/",
+                    "description": "Classic chess game. Plan your strategy and defeat your opponent.",
+                    "genre": ["Strategy", "Board"],
+                    "gamePlatform": "Web Browser"
+                },
+                {
+                    "@type": "VideoGame",
+                    "position": 8,
+                    "name": "Hangman",
+                    "url": "http://game.friday-go.icu/games/hangman/",
+                    "description": "Guess the hidden word before you run out of attempts.",
+                    "genre": ["Word", "Puzzle"],
+                    "gamePlatform": "Web Browser"
+                }
+            ]
+        }
     }
     </script>
 </head>
