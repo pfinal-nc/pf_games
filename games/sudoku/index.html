@@ -89,69 +89,211 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
-            background-color: #faf8ef;
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            color: #1a1a2e;
             margin: 0;
+            min-height: 100vh;
         }
+
+        #game-container {
+            max-width: 600px;
+            margin: 2rem auto;
+            text-align: center;
+            padding: 0 1rem;
+        }
+
         #score-board {
             display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin: 10px 0;
-        }
-        #timer, #mistakes {
-            background-color: #bbada0;
+            justify-content: space-between;
+            margin: 1rem 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+            background-color: #0f3460;
             color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
+
         #sudoku-board {
             display: grid;
-            grid-template-columns: repeat(9, 36px);
-            grid-template-rows: repeat(9, 36px);
+            grid-template-columns: repeat(9, 1fr);
+            grid-template-rows: repeat(9, 1fr);
             gap: 2px;
-            background-color: #bbada0;
-            padding: 10px;
-            border-radius: 5px;
-            margin: 20px 0;
+            background-color: #16213e;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px auto;
+            max-width: 450px;
+            aspect-ratio: 1;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
+
         .cell {
-            width: 36px;
-            height: 36px;
-            background: #eee4da;
+            background: #0f3460;
             border-radius: 4px;
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 1.2rem;
-            line-height: 36px;
+            font-weight: bold;
             cursor: pointer;
             outline: none;
-            border: 1px solid #d3c6b5;
-            transition: background 0.2s;
+            transition: all 0.3s ease;
+            color: white;
+            aspect-ratio: 1;
+            border: 2px solid transparent;
         }
+
+        .cell:hover:not(.prefilled) {
+            background: #1a4a73;
+            transform: scale(1.05);
+        }
+
         .cell.prefilled {
-            background: #f2b179;
+            background: #e94560;
             color: #fff;
             font-weight: bold;
             cursor: default;
         }
+
         .cell.selected {
-            background: #a9d18e;
+            background: #4CAF50;
+            border-color: #2E7D32;
+            transform: scale(1.1);
         }
+
         .cell.error {
-            background: #e06666;
+            background: #f44336;
             color: #fff;
+            animation: shake 0.5s ease-in-out;
         }
+
+        .cell.highlight-same {
+            background: #2196F3;
+        }
+
+        .cell.highlight-row-col {
+            background: #1565C0;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        #game-controls {
+            margin: 1.5rem 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .control-btn {
+            background-color: #e94560;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            margin: 0 0.3rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .control-btn:hover {
+            background-color: #cf3a54;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .control-btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .control-btn.secondary {
+            background-color: #0f3460;
+        }
+
+        .control-btn.secondary:hover {
+            background-color: #0a2647;
+        }
+
+        #difficulty-selector {
+            margin: 1rem 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .difficulty-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid #0f3460;
+            background: white;
+            color: #0f3460;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .difficulty-btn.active {
+            background: #0f3460;
+            color: white;
+        }
+
+        .difficulty-btn:hover {
+            background: #0f3460;
+            color: white;
+        }
+
+        #number-pad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            max-width: 200px;
+            margin: 1rem auto;
+        }
+
+        .number-btn {
+            background: #0f3460;
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .number-btn:hover {
+            background: #1a4a73;
+            transform: scale(1.05);
+        }
+
         #game-rules {
             text-align: left;
-            color: #776e65;
-            width: 90%;
-            max-width: 500px;
-            font-size: 14px;
+            color: #b3b3b3;
+            max-width: 600px;
+            margin: 1.5rem auto;
+            font-size: 0.9rem;
+            background-color: #16213e;
+            padding: 1.2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
+
+        #game-rules h3 {
+            color: #e94560;
+            margin-bottom: 0.5rem;
+        }
+
         #win-modal {
             display: none;
             position: fixed;
@@ -159,17 +301,46 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.7);
             align-items: center;
             justify-content: center;
             z-index: 1000;
         }
+
         #win-modal-content {
-            background-color: white;
-            padding: 20px;
-            border-radius: 5px;
+            background-color: #16213e;
+            padding: 2.5rem;
+            border-radius: 12px;
             text-align: center;
+            max-width: 400px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border: 2px solid #e94560;
+            animation: modalAppear 0.3s ease-out;
         }
+
+        #win-modal-content h2 {
+            color: #e94560;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes modalAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        #final-stats {
+            font-size: 1.2rem;
+            margin: 1rem 0;
+            color: white;
+        }
+
         .lang-switch {
             display: flex;
             align-items: center;
@@ -181,73 +352,142 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
+
         .lang-switch:hover {
             background-color: #4f46e5;
         }
-        .site-header {
-            width: 100%;
-            background-color: #6366f1;
-            color: white;
-            padding: 16px 0;
-            margin-bottom: 20px;
-        }
-        .nav-link {
-            color: white;
-            transition: color 0.3s;
+
+        @media (max-width: 640px) {
+            #game-container {
+                margin: 1rem auto;
+                padding: 0 0.5rem;
+            }
+
+            #sudoku-board {
+                max-width: 90vw;
+                padding: 15px;
+            }
+
+            .cell {
+                font-size: 1rem;
+            }
+
+            #score-board {
+                font-size: 1rem;
+                padding: 0.6rem 1rem;
+            }
+
+            #number-pad {
+                max-width: 180px;
+            }
+
+            .number-btn {
+                padding: 0.8rem;
+                font-size: 1rem;
+            }
         }
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2154665617309406"
     crossorigin="anonymous"></script>
 </head>
-<body>
-  <!-- Header -->
-  <header class="bg-indigo-600 text-white shadow-md w-full">
-    <div class="flex justify-between items-center px-4 py-4 w-full max-w-none">
-        <div class="flex items-center space-x-2">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
-            </svg>
-            <span class="text-xl font-bold" data-lang-key="siteName">PFinalClub Games</span>
-        </div>
-        <div class="flex items-center space-x-4">
-            <div id="langSwitch" class="lang-switch">
-                <span id="currentLang" class="text-sm font-medium">中文</span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+<body class="bg-gray-100 min-h-screen">
+    <!-- Header -->
+    <header class="bg-indigo-600 text-white shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
                 </svg>
+                <span class="text-xl font-bold" data-lang-key="siteName">PFinalClub Games</span>
             </div>
-            <nav>
-                <ul class="flex space-x-6">
-                    <li><a href="../../" class="hover:text-indigo-200" data-lang-key="nav.home">首页</a></li>
-                    <li><a href="../../games/" class="hover:text-indigo-200" data-lang-key="nav.allGames">全部游戏</a></li>
-                    <li><a href="../../leaderboard/" class="hover:text-indigo-200" data-lang-key="nav.leaderboard">排行榜</a></li>
-                    <li><a href="../../about/" class="hover:text-indigo-200" data-lang-key="nav.about">关于我们</a></li>
+            <div class="flex items-center space-x-4">
+                <div id="langSwitch" class="lang-switch">
+                    <span id="currentLang" class="text-sm font-medium">中文</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+                    </svg>
+                </div>
+                <nav>
+                    <ul class="flex space-x-6">
+                        <li><a href="../../" class="hover:text-indigo-200" data-lang-key="nav.home">首页</a></li>
+                        <li><a href="../../games/" class="hover:text-indigo-200" data-lang-key="nav.allGames">全部游戏</a></li>
+                        <li><a href="../../leaderboard/" class="hover:text-indigo-200" data-lang-key="nav.leaderboard">排行榜</a></li>
+                        <li><a href="../../about/" class="hover:text-indigo-200" data-lang-key="nav.about">关于我们</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- 游戏主体 -->
+    <main class="container mx-auto px-4 py-8 w-full">
+        <h1 class="text-3xl font-bold text-center mb-6" data-lang-key="games.sudoku.title">数独</h1>
+        <p class="text-center mb-8 max-w-2xl mx-auto" data-lang-key="games.sudoku.desc">填充9x9网格，使每行、每列和每个3x3方块包含数字1-9。</p>
+
+        <div id="game-container">
+            <!-- 难度选择 -->
+            <div id="difficulty-selector">
+                <button class="difficulty-btn active" data-difficulty="easy" data-lang-key="games.sudoku.easy">简单</button>
+                <button class="difficulty-btn" data-difficulty="medium" data-lang-key="games.sudoku.medium">中等</button>
+                <button class="difficulty-btn" data-difficulty="hard" data-lang-key="games.sudoku.hard">困难</button>
+            </div>
+
+            <!-- 分数板 -->
+            <div id="score-board">
+                <div id="timer" data-lang-key="games.sudoku.timer">用时: 00:00</div>
+                <div id="mistakes" data-lang-key="games.sudoku.mistakes">错误: 0/3</div>
+            </div>
+
+            <!-- 数独游戏板 -->
+            <div id="sudoku-board"></div>
+
+            <!-- 数字输入板 -->
+            <div id="number-pad">
+                <button class="number-btn" data-number="1">1</button>
+                <button class="number-btn" data-number="2">2</button>
+                <button class="number-btn" data-number="3">3</button>
+                <button class="number-btn" data-number="4">4</button>
+                <button class="number-btn" data-number="5">5</button>
+                <button class="number-btn" data-number="6">6</button>
+                <button class="number-btn" data-number="7">7</button>
+                <button class="number-btn" data-number="8">8</button>
+                <button class="number-btn" data-number="9">9</button>
+            </div>
+
+            <!-- 游戏控制按钮 -->
+            <div id="game-controls">
+                <button onclick="clearCell()" class="control-btn secondary" data-lang-key="games.sudoku.clear">清除</button>
+                <button onclick="getHint()" class="control-btn secondary" data-lang-key="games.sudoku.hint">提示</button>
+                <button onclick="restartGame()" class="control-btn" data-lang-key="games.snake.restartButton">重新开始</button>
+                <button onclick="newGame()" class="control-btn" data-lang-key="games.sudoku.newGame">新游戏</button>
+            </div>
+
+            <!-- 游戏规则 -->
+            <div id="game-rules">
+                <h3 class="font-bold mb-2" data-lang-key="games.sudoku.rulesTitle">游戏规则：</h3>
+                <ul class="list-disc list-inside space-y-1">
+                    <li data-lang-key="games.sudoku.rule1">每行必须包含数字1-9，不能重复</li>
+                    <li data-lang-key="games.sudoku.rule2">每列必须包含数字1-9，不能重复</li>
+                    <li data-lang-key="games.sudoku.rule3">每个3x3方块必须包含数字1-9，不能重复</li>
+                    <li data-lang-key="games.sudoku.rule4">点击空格选择，然后点击数字或使用键盘输入</li>
                 </ul>
-            </nav>
+                <p class="mt-2" data-lang-key="games.sudoku.tips">提示：从已知数字最多的行、列或方块开始填写，会更容易找到答案。</p>
+            </div>
         </div>
-    </div>
-</header>
-    <div id="score-board">
-        <div id="timer" data-lang-key="games.sudoku.timer">用时: 0s</div>
-        <div id="mistakes" data-lang-key="games.sudoku.mistakes">错误: 0</div>
-    </div>
-    <div id="sudoku-board"></div>
-    <div style="margin:10px 0;">
-        <button onclick="restartGame()" class="lang-switch" data-lang-key="games.snake.restartButton">重新开始</button>
-    </div>
-    <div id="game-rules" class="mb-8">
-        <h3 data-lang-key="games.sudoku.title">玩法说明</h3>
-        <ul>
-            <li data-lang-key="games.sudoku.desc">填充9x9网格，使每行、每列和每个3x3方块包含数字1-9。</li>
-        </ul>
-    </div>
-    <div id="win-modal">
-        <div id="win-modal-content">
-            <h2 id="modal-title" data-lang-key="games.snake.gameOver">游戏结束</h2>
-            <p id="modal-msg"><span data-lang-key="games.sudoku.finalTime">用时：</span><span id="final-time">0s</span></p>
-            <button onclick="restartGame()" class="lang-switch" data-lang-key="games.snake.playAgain">再来一局</button>
+
+        <!-- 游戏完成弹窗 -->
+        <div id="win-modal">
+            <div id="win-modal-content">
+                <h2 class="text-2xl font-bold mb-4" data-lang-key="games.sudoku.congratulations">恭喜完成！</h2>
+                <div id="final-stats">
+                    <div data-lang-key="games.sudoku.finalTime">用时: <span id="final-time">00:00</span></div>
+                    <div data-lang-key="games.sudoku.finalMistakes">错误: <span id="final-mistakes">0</span></div>
+                    <div data-lang-key="games.sudoku.difficulty">难度: <span id="final-difficulty">简单</span></div>
+                </div>
+                <button onclick="newGame()" class="control-btn" data-lang-key="games.sudoku.playAgain">再玩一次</button>
+            </div>
         </div>
-    </div>
+    </main>
     <script src="../../js/lang.js"></script>
     <script src="../../js/main.js"></script>
     <script src="sudoku.js"></script>
