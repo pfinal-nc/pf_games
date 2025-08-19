@@ -84,13 +84,25 @@ function flipCard(id) {
 }
 
 function updateScore() {
-    document.getElementById('score').textContent = score;
-    document.getElementById('final-score').textContent = score;
+    const currentLang = localStorage.getItem('language') || 'zh';
+    const scorePrefix = currentLang === 'zh' ? '得分: ' : 'Score: ';
+    const finalScorePrefix = currentLang === 'zh' ? '最终得分: ' : 'Final Score: ';
+    
+    document.getElementById('score').textContent = scorePrefix + score;
+    document.getElementById('final-score').textContent = finalScorePrefix + score;
 }
+
 function updateMoves() {
-    document.getElementById('moves').textContent = moves;
+    const currentLang = localStorage.getItem('language') || 'zh';
+    const movesPrefix = currentLang === 'zh' ? '步数: ' : 'Moves: ';
+    const finalMovesPrefix = currentLang === 'zh' ? '总步数: ' : 'Total Moves: ';
+    
+    document.getElementById('moves').textContent = movesPrefix + moves;
+    document.getElementById('final-moves').textContent = finalMovesPrefix + moves;
 }
 function showModal() {
+    updateScore();
+    updateMoves();
     document.getElementById('win-modal').style.display = 'flex';
 }
 function hideModal() {

@@ -92,40 +92,49 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
-            background-color: #faf8ef;
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            color: #1a1a2e;
             margin: 0;
+            min-height: 100vh;
         }
+
+        #game-container {
+            max-width: 500px;
+            margin: 2rem auto;
+            text-align: center;
+            padding: 0 1rem;
+        }
+
         #score-board {
             display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin: 10px 0;
-        }
-        #score, #moves {
-            background-color: #bbada0;
+            justify-content: space-between;
+            margin: 1rem 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+            background-color: #0f3460;
             color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
+
         #game-board {
             display: grid;
-            grid-template-columns: repeat(4, 60px);
-            grid-template-rows: repeat(4, 60px);
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(4, 1fr);
             gap: 10px;
-            background-color: #bbada0;
-            padding: 10px;
-            border-radius: 5px;
-            margin: 20px 0;
+            background-color: #16213e;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px auto;
+            max-width: 400px;
+            aspect-ratio: 1;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
+
         .card {
-            width: 60px;
-            height: 60px;
-            background: #eee4da;
+            background: #0f3460;
             border-radius: 8px;
             display: flex;
             align-items: center;
@@ -134,33 +143,97 @@
             cursor: pointer;
             user-select: none;
             position: relative;
-            transition: transform 0.2s;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            aspect-ratio: 1;
         }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
         .card.flipped, .card.matched {
-            background: #f2b179;
+            background: #e94560;
             color: #fff;
             cursor: default;
+            transform: scale(1.05);
         }
+
         .card .back {
             position: absolute;
             width: 100%;
             height: 100%;
-            left: 0; top: 0;
-            background: #bbada0;
+            left: 0; 
+            top: 0;
+            background: #0f3460;
             border-radius: 8px;
             z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
+
+        .card .back::after {
+            content: '?';
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
         .card.flipped .back, .card.matched .back {
             display: none;
         }
+
+        #game-controls {
+            margin: 1.5rem 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .control-btn {
+            background-color: #e94560;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            margin: 0 0.3rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .control-btn:hover {
+            background-color: #cf3a54;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .control-btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
         #game-rules {
             text-align: left;
-            color: #776e65;
-            width: 90%;
+            color: #b3b3b3;
             max-width: 500px;
-            font-size: 14px;
+            margin: 1.5rem auto;
+            font-size: 0.9rem;
+            background-color: #16213e;
+            padding: 1.2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
+
+        #game-rules h3 {
+            color: #e94560;
+            margin-bottom: 0.5rem;
+        }
+
         #win-modal {
             display: none;
             position: fixed;
@@ -168,17 +241,47 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.7);
             align-items: center;
             justify-content: center;
             z-index: 1000;
         }
+
         #win-modal-content {
-            background-color: white;
-            padding: 20px;
-            border-radius: 5px;
+            background-color: #16213e;
+            padding: 2.5rem;
+            border-radius: 12px;
             text-align: center;
+            max-width: 400px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border: 2px solid #e94560;
+            animation: modalAppear 0.3s ease-out;
         }
+
+        #win-modal-content h2 {
+            color: #e94560;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes modalAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        #final-score {
+            font-size: 1.8rem;
+            margin: 1rem 0;
+            color: #e94560;
+            font-weight: bold;
+        }
+
         .lang-switch {
             display: flex;
             align-items: center;
@@ -190,23 +293,34 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
+
         .lang-switch:hover {
             background-color: #4f46e5;
         }
-        .site-header {
-            width: 100%;
-            background-color: #6366f1;
-            color: white;
-            padding: 16px 0;
-            margin-bottom: 20px;
-        }
-        .nav-link {
-            color: white;
-            transition: color 0.3s;
+
+        @media (max-width: 640px) {
+            #game-container {
+                margin: 1rem auto;
+                padding: 0 0.5rem;
+            }
+
+            #game-board {
+                max-width: 90vw;
+                padding: 15px;
+            }
+
+            .card {
+                font-size: 1.5rem;
+            }
+
+            #score-board {
+                font-size: 1rem;
+                padding: 0.6rem 1rem;
+            }
         }
     </style>
 </head>
-<body>
+<body class="bg-gray-100 min-h-screen">
   <!-- Header -->
   <header class="bg-indigo-600 text-white shadow-md w-full">
     <div class="flex justify-between items-center px-4 py-4 w-full max-w-none">
@@ -234,27 +348,39 @@
         </div>
     </div>
 </header>
-    <div id="score-board">
-        <div id="score" data-lang-key="games.2048.score">0</div>
-        <div id="moves" data-lang-key="games.memory.moves">步数: 0</div>
-    </div>
-    <div id="game-board"></div>
-    <div style="margin:10px 0;">
-        <button onclick="restartGame()" class="lang-switch" data-lang-key="games.snake.restartButton">重新开始</button>
-    </div>
-    <div id="game-rules" class="mb-8">
-        <h3 data-lang-key="games.memory.title">玩法说明</h3>
-        <ul>
-            <li data-lang-key="games.memory.desc">测试你的记忆力，找出所有匹配的卡片对。</li>
-        </ul>
-    </div>
-    <div id="win-modal">
-        <div id="win-modal-content">
-            <h2 id="modal-title" data-lang-key="games.snake.gameOver">游戏结束</h2>
-            <p id="modal-msg"><span data-lang-key="games.snake.finalScore">你的得分：</span><span id="final-score">0</span></p>
-            <button onclick="restartGame()" class="lang-switch" data-lang-key="games.snake.playAgain">再来一局</button>
+    <!-- 游戏主体 -->
+    <main class="container mx-auto px-4 py-8 w-full">
+        <h1 class="text-3xl font-bold text-center mb-6" data-lang-key="games.memory.title">记忆卡牌</h1>
+        <p class="text-center mb-8 max-w-2xl mx-auto" data-lang-key="games.memory.desc">测试你的记忆力，找出所有匹配的卡片对。</p>
+
+        <div id="game-container">
+            <div id="score-board">
+                <div id="score" data-lang-key="games.memory.score">得分: 0</div>
+                <div id="moves" data-lang-key="games.memory.moves">步数: 0</div>
+            </div>
+
+            <div id="game-board"></div>
+
+            <div id="game-controls">
+                <button onclick="restartGame()" class="control-btn" data-lang-key="games.snake.restartButton">重新开始</button>
+            </div>
+
+            <div id="game-rules">
+                <h3 class="font-bold mb-2" data-lang-key="games.memory.rulesTitle">游戏规则：</h3>
+                <p data-lang-key="games.memory.rules">点击卡片翻开，找到两张相同的卡片即可配对成功。记住卡片的位置，用最少的步数完成所有配对。</p>
+                <p class="mt-2" data-lang-key="games.memory.tips">提示：仔细观察每张卡片的位置，运用记忆技巧提高配对效率。</p>
+            </div>
         </div>
-    </div>
+    </main>
+        <!-- 游戏完成弹窗 -->
+        <div id="win-modal">
+            <div id="win-modal-content">
+                <h2 class="text-2xl font-bold mb-4" data-lang-key="games.memory.gameComplete">恭喜完成！</h2>
+                <div id="final-score" data-lang-key="games.memory.finalResult">最终得分: 0</div>
+                <div id="final-moves" data-lang-key="games.memory.finalMoves">总步数: 0</div>
+                <button onclick="restartGame()" class="control-btn" data-lang-key="games.snake.playAgain">再玩一次</button>
+            </div>
+        </div>
     <script src="../../js/lang.js"></script>
     <script src="../../js/main.js"></script>
     <script src="memory.js"></script>
